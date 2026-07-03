@@ -1,0 +1,105 @@
+name: Publish
+
+# Continuous delivery: every merge to main publishes a new stable version to
+# both NuGet (the `EFViz` .NET tool) and npm (the `efviz` CLI). The patch number
+# is the workflow run number, so versions are always unique and monotonic.
+#
+# Requires two repository secrets (each publish step is skipped if its key is
+# absent, so this workflow is safe to merge before they are configured):
+#   NUGET_API_KEY  — nuget.org push key scoped to EFViz
+#   NPM_API_KEY    — npmjs.com automation token for the efviz package
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.ver.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Derive version (MAJOR.MINOR from csproj + run number)
+        id: ver
+        run: |
+          base=$(grep -oP '(?<=<Version>)[0-9]+\.[0-9]+' dotnet/EFViz/EFViz.csproj | head -1)
+          echo "version=${base}.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: .NET tests (+ Node↔.NET parity)
+        run: dotnet test dotnet/EFViz.sln -c Release
+
+      - name: Node tests
+        run: node --test
+
+  publish-nuget:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Pack
+        run: |
+          dotnet pack dotnet/EFViz/EFViz.csproj -c Release \
+            -p:Version=${{ needs.build-test.outputs.version }} \
+            -p:ContinuousIntegrationBuild=true \
+            -o artifacts
+      - name: Push to NuGet
+        if: ${{ env.NUGET_API_KEY != '' }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push "artifacts/*.nupkg" \
+            --api-key "$NUGET_API_KEY" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+      - name: Skipped (no NUGET_API_KEY)
+        if: ${{ env.NUGET_API_KEY == '' }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: echo "::notice::NUGET_API_KEY not set — packed v${{ needs.build-test.outputs.version }} but did not publish."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget-${{ needs.build-test.outputs.version }}
+          path: artifacts/*.nupkg
+
+  publish-npm:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - name: Set package version
+        run: npm version "${{ needs.build-test.outputs.version }}" --no-git-tag-version --allow-same-version
+      - name: Publish to npm
+        if: ${{ env.NODE_AUTH_TOKEN != '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
+        run: npm publish --access public
+      - name: Skipped (no NPM_API_KEY)
+        if: ${{ env.NODE_AUTH_TOKEN == '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
+        run: echo "::notice::NPM_API_KEY not set — prepared v${{ needs.build-test.outputs.version }} but did not publish."
