@@ -4,3 +4,11 @@ node_modules/
 entity-diagram.html
 entity-diagram.json
 /tmp/
+
+# .NET build artifacts (scoped so the Node CLI's bin/ is not ignored)
+dotnet/**/bin/
+dotnet/**/obj/
+examples/**/bin/
+examples/**/obj/
+*.user
+nupkg/

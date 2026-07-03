@@ -1,13 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebShop.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+var options = new DbContextOptionsBuilder<ShopContext>()
+    .UseSqlServer("Server=localhost;Database=WebShop;Trusted_Connection=True;TrustServerCertificate=True")
+    .Options;
 
-builder.Services.AddDbContext<ShopContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-
-var app = builder.Build();
-
-app.MapGet("/", () => "WebShop sample for AutoEntityDiagram");
-
-app.Run();
+using var db = new ShopContext(options);
+Console.WriteLine($"WebShop sample for AutoEntityDiagram — {db.Model.GetEntityTypes().Count()} entity types in the model.");

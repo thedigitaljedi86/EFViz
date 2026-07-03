@@ -1,0 +1,5208 @@
+{
+  "tool": "AutoEntityDiagram",
+  "generatedAt": "",
+  "root": "",
+  "contexts": [
+    {
+      "name": "ShopContext",
+      "namespace": "WebShop.Data",
+      "filePath": "Data/ShopContext.cs",
+      "provider": "SQL Server",
+      "dbSetCount": 7,
+      "modelSource": "snapshot",
+      "migrations": [
+        {
+          "id": "20250110093000_InitialCreate",
+          "name": "InitialCreate",
+          "timestamp": "2025-01-10T09:30:00",
+          "filePath": "Migrations/20250110093000_InitialCreate.Designer.cs",
+          "model": {
+            "productVersion": "8.0.6",
+            "annotations": {
+              "ProductVersion": "8.0.6",
+              "Relational:MaxIdentifierLength": 128
+            },
+            "entities": [
+              {
+                "name": "Category",
+                "fullName": "WebShop.Models.Category",
+                "table": "Categories",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Slug",
+                    "columnName": "Slug",
+                    "clrType": "string",
+                    "storeType": "nvarchar(120)",
+                    "isRequired": true,
+                    "maxLength": 120,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "Slug"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Customer",
+                "fullName": "WebShop.Models.Customer",
+                "table": "Customers",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Email",
+                    "columnName": "Email",
+                    "clrType": "string",
+                    "storeType": "nvarchar(256)",
+                    "isRequired": true,
+                    "maxLength": 256,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "FullName",
+                    "columnName": "FullName",
+                    "clrType": "string",
+                    "storeType": "nvarchar(150)",
+                    "isRequired": false,
+                    "maxLength": 150,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Order",
+                "fullName": "WebShop.Models.Order",
+                "table": "Orders",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CustomerId",
+                    "columnName": "CustomerId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "OrderNumber",
+                    "columnName": "OrderNumber",
+                    "clrType": "string",
+                    "storeType": "nvarchar(20)",
+                    "isRequired": true,
+                    "maxLength": 20,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "PlacedAt",
+                    "columnName": "PlacedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Status",
+                    "columnName": "Status",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Total",
+                    "columnName": "Total",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CustomerId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "OrderNumber"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "OrderItem",
+                "fullName": "WebShop.Models.OrderItem",
+                "table": "OrderItems",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "OrderId",
+                    "columnName": "OrderId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "ProductId",
+                    "columnName": "ProductId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Quantity",
+                    "columnName": "Quantity",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "UnitPrice",
+                    "columnName": "UnitPrice",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "OrderId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "ProductId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Product",
+                "fullName": "WebShop.Models.Product",
+                "table": "Products",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CategoryId",
+                    "columnName": "CategoryId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Description",
+                    "columnName": "Description",
+                    "clrType": "string",
+                    "storeType": "nvarchar(max)",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "IsDiscontinued",
+                    "columnName": "IsDiscontinued",
+                    "clrType": "bool",
+                    "storeType": "bit",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "LegacyCode",
+                    "columnName": "LegacyCode",
+                    "clrType": "string",
+                    "storeType": "nvarchar(64)",
+                    "isRequired": false,
+                    "maxLength": 64,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Price",
+                    "columnName": "Price",
+                    "clrType": "decimal",
+                    "storeType": "decimal(10,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 10,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Sku",
+                    "columnName": "Sku",
+                    "clrType": "string",
+                    "storeType": "nvarchar(32)",
+                    "isRequired": true,
+                    "maxLength": 32,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Stock",
+                    "columnName": "Stock",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Sku"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              }
+            ],
+            "relationships": [
+              {
+                "dependent": "WebShop.Models.Order",
+                "principal": "WebShop.Models.Customer",
+                "navigation": "Customer",
+                "inverseNavigation": "Orders",
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Order",
+                "navigation": "Order",
+                "inverseNavigation": "Items",
+                "foreignKey": [
+                  "OrderId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Product",
+                "navigation": "Product",
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Category",
+                "navigation": "Category",
+                "inverseNavigation": "Products",
+                "foreignKey": [
+                  "CategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              }
+            ]
+          },
+          "diff": {
+            "addedEntities": [
+              "WebShop.Models.Category",
+              "WebShop.Models.Customer",
+              "WebShop.Models.Order",
+              "WebShop.Models.OrderItem",
+              "WebShop.Models.Product"
+            ],
+            "removedEntities": [],
+            "modifiedEntities": [],
+            "addedRelationships": [
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.Order",
+                "principal": "WebShop.Models.Customer",
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "via": null,
+                "onDelete": "Restrict"
+              },
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Order",
+                "foreignKey": [
+                  "OrderId"
+                ],
+                "via": null,
+                "onDelete": "Cascade"
+              },
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Product",
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "via": null,
+                "onDelete": "Restrict"
+              },
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Category",
+                "foreignKey": [
+                  "CategoryId"
+                ],
+                "via": null,
+                "onDelete": "Cascade"
+              }
+            ],
+            "removedRelationships": [],
+            "changeCount": 9
+          }
+        },
+        {
+          "id": "20250214141500_AddCustomerAddressAndCategoryTree",
+          "name": "AddCustomerAddressAndCategoryTree",
+          "timestamp": "2025-02-14T14:15:00",
+          "filePath": "Migrations/20250214141500_AddCustomerAddressAndCategoryTree.Designer.cs",
+          "model": {
+            "productVersion": "8.0.6",
+            "annotations": {
+              "ProductVersion": "8.0.6",
+              "Relational:MaxIdentifierLength": 128
+            },
+            "entities": [
+              {
+                "name": "Category",
+                "fullName": "WebShop.Models.Category",
+                "table": "Categories",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "ParentCategoryId",
+                    "columnName": "ParentCategoryId",
+                    "clrType": "int?",
+                    "storeType": "int",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Slug",
+                    "columnName": "Slug",
+                    "clrType": "string",
+                    "storeType": "nvarchar(120)",
+                    "isRequired": true,
+                    "maxLength": 120,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "ParentCategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Slug"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Customer",
+                "fullName": "WebShop.Models.Customer",
+                "table": "Customers",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Email",
+                    "columnName": "Email",
+                    "clrType": "string",
+                    "storeType": "nvarchar(256)",
+                    "isRequired": true,
+                    "maxLength": 256,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "FullName",
+                    "columnName": "FullName",
+                    "clrType": "string",
+                    "storeType": "nvarchar(150)",
+                    "isRequired": false,
+                    "maxLength": 150,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "LoyaltyPoints",
+                    "columnName": "LoyaltyPoints",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": 0,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Address.City",
+                    "columnName": "Address_City",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.Country",
+                    "columnName": "Address_Country",
+                    "clrType": "string",
+                    "storeType": "nvarchar(2)",
+                    "isRequired": true,
+                    "maxLength": 2,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.PostalCode",
+                    "columnName": "Address_PostalCode",
+                    "clrType": "string",
+                    "storeType": "nvarchar(16)",
+                    "isRequired": true,
+                    "maxLength": 16,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.Street",
+                    "columnName": "Address_Street",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "Email"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [
+                  {
+                    "type": "WebShop.Models.Address",
+                    "navigation": "Address",
+                    "kind": "one",
+                    "inline": true,
+                    "columns": [
+                      "Address_City",
+                      "Address_Country",
+                      "Address_PostalCode",
+                      "Address_Street"
+                    ]
+                  }
+                ],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Order",
+                "fullName": "WebShop.Models.Order",
+                "table": "Orders",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CustomerId",
+                    "columnName": "CustomerId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "OrderNumber",
+                    "columnName": "OrderNumber",
+                    "clrType": "string",
+                    "storeType": "nvarchar(20)",
+                    "isRequired": true,
+                    "maxLength": 20,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "PlacedAt",
+                    "columnName": "PlacedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Status",
+                    "columnName": "Status",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Total",
+                    "columnName": "Total",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CustomerId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "OrderNumber"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "OrderItem",
+                "fullName": "WebShop.Models.OrderItem",
+                "table": "OrderItems",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "OrderId",
+                    "columnName": "OrderId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "ProductId",
+                    "columnName": "ProductId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Quantity",
+                    "columnName": "Quantity",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "UnitPrice",
+                    "columnName": "UnitPrice",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "OrderId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "ProductId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Product",
+                "fullName": "WebShop.Models.Product",
+                "table": "Products",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CategoryId",
+                    "columnName": "CategoryId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Description",
+                    "columnName": "Description",
+                    "clrType": "string",
+                    "storeType": "nvarchar(max)",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "IsDiscontinued",
+                    "columnName": "IsDiscontinued",
+                    "clrType": "bool",
+                    "storeType": "bit",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "LegacyCode",
+                    "columnName": "LegacyCode",
+                    "clrType": "string",
+                    "storeType": "nvarchar(64)",
+                    "isRequired": false,
+                    "maxLength": 64,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Price",
+                    "columnName": "Price",
+                    "clrType": "decimal",
+                    "storeType": "decimal(10,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 10,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Sku",
+                    "columnName": "Sku",
+                    "clrType": "string",
+                    "storeType": "nvarchar(32)",
+                    "isRequired": true,
+                    "maxLength": 32,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Stock",
+                    "columnName": "Stock",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Sku"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              }
+            ],
+            "relationships": [
+              {
+                "dependent": "WebShop.Models.Category",
+                "principal": "WebShop.Models.Category",
+                "navigation": "ParentCategory",
+                "inverseNavigation": "Children",
+                "foreignKey": [
+                  "ParentCategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": null,
+                "isRequired": false
+              },
+              {
+                "dependent": "WebShop.Models.Order",
+                "principal": "WebShop.Models.Customer",
+                "navigation": "Customer",
+                "inverseNavigation": "Orders",
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Order",
+                "navigation": "Order",
+                "inverseNavigation": "Items",
+                "foreignKey": [
+                  "OrderId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Product",
+                "navigation": "Product",
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Category",
+                "navigation": "Category",
+                "inverseNavigation": "Products",
+                "foreignKey": [
+                  "CategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              }
+            ]
+          },
+          "diff": {
+            "addedEntities": [],
+            "removedEntities": [],
+            "modifiedEntities": [
+              {
+                "entity": "WebShop.Models.Category",
+                "name": "Category",
+                "addedColumns": [
+                  "ParentCategoryId"
+                ],
+                "removedColumns": [],
+                "modifiedColumns": [],
+                "addedIndexes": [
+                  "(ParentCategoryId)"
+                ],
+                "removedIndexes": [],
+                "tableChanged": null
+              },
+              {
+                "entity": "WebShop.Models.Customer",
+                "name": "Customer",
+                "addedColumns": [
+                  "LoyaltyPoints",
+                  "Address.City",
+                  "Address.Country",
+                  "Address.PostalCode",
+                  "Address.Street"
+                ],
+                "removedColumns": [],
+                "modifiedColumns": [],
+                "addedIndexes": [
+                  "unique (Email)"
+                ],
+                "removedIndexes": [],
+                "tableChanged": null
+              }
+            ],
+            "addedRelationships": [
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.Category",
+                "principal": "WebShop.Models.Category",
+                "foreignKey": [
+                  "ParentCategoryId"
+                ],
+                "via": null,
+                "onDelete": null
+              }
+            ],
+            "removedRelationships": [],
+            "changeCount": 9
+          }
+        },
+        {
+          "id": "20250401110200_AddProductTags",
+          "name": "AddProductTags",
+          "timestamp": "2025-04-01T11:02:00",
+          "filePath": "Migrations/20250401110200_AddProductTags.Designer.cs",
+          "model": {
+            "productVersion": "8.0.6",
+            "annotations": {
+              "ProductVersion": "8.0.6",
+              "Relational:MaxIdentifierLength": 128
+            },
+            "entities": [
+              {
+                "name": "Category",
+                "fullName": "WebShop.Models.Category",
+                "table": "Categories",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "ParentCategoryId",
+                    "columnName": "ParentCategoryId",
+                    "clrType": "int?",
+                    "storeType": "int",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Slug",
+                    "columnName": "Slug",
+                    "clrType": "string",
+                    "storeType": "nvarchar(120)",
+                    "isRequired": true,
+                    "maxLength": 120,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "ParentCategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Slug"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Customer",
+                "fullName": "WebShop.Models.Customer",
+                "table": "Customers",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Email",
+                    "columnName": "Email",
+                    "clrType": "string",
+                    "storeType": "nvarchar(256)",
+                    "isRequired": true,
+                    "maxLength": 256,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "FullName",
+                    "columnName": "FullName",
+                    "clrType": "string",
+                    "storeType": "nvarchar(150)",
+                    "isRequired": false,
+                    "maxLength": 150,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "LoyaltyPoints",
+                    "columnName": "LoyaltyPoints",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": 0,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Address.City",
+                    "columnName": "Address_City",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.Country",
+                    "columnName": "Address_Country",
+                    "clrType": "string",
+                    "storeType": "nvarchar(2)",
+                    "isRequired": true,
+                    "maxLength": 2,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.PostalCode",
+                    "columnName": "Address_PostalCode",
+                    "clrType": "string",
+                    "storeType": "nvarchar(16)",
+                    "isRequired": true,
+                    "maxLength": 16,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.Street",
+                    "columnName": "Address_Street",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "Email"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [
+                  {
+                    "type": "WebShop.Models.Address",
+                    "navigation": "Address",
+                    "kind": "one",
+                    "inline": true,
+                    "columns": [
+                      "Address_City",
+                      "Address_Country",
+                      "Address_PostalCode",
+                      "Address_Street"
+                    ]
+                  }
+                ],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Order",
+                "fullName": "WebShop.Models.Order",
+                "table": "Orders",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CustomerId",
+                    "columnName": "CustomerId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "OrderNumber",
+                    "columnName": "OrderNumber",
+                    "clrType": "string",
+                    "storeType": "nvarchar(20)",
+                    "isRequired": true,
+                    "maxLength": 20,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "PlacedAt",
+                    "columnName": "PlacedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Status",
+                    "columnName": "Status",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Total",
+                    "columnName": "Total",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CustomerId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "OrderNumber"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "OrderItem",
+                "fullName": "WebShop.Models.OrderItem",
+                "table": "OrderItems",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "OrderId",
+                    "columnName": "OrderId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "ProductId",
+                    "columnName": "ProductId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Quantity",
+                    "columnName": "Quantity",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "UnitPrice",
+                    "columnName": "UnitPrice",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "OrderId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "ProductId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Product",
+                "fullName": "WebShop.Models.Product",
+                "table": "Products",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CategoryId",
+                    "columnName": "CategoryId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Description",
+                    "columnName": "Description",
+                    "clrType": "string",
+                    "storeType": "nvarchar(max)",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "IsDiscontinued",
+                    "columnName": "IsDiscontinued",
+                    "clrType": "bool",
+                    "storeType": "bit",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "LegacyCode",
+                    "columnName": "LegacyCode",
+                    "clrType": "string",
+                    "storeType": "nvarchar(64)",
+                    "isRequired": false,
+                    "maxLength": 64,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Price",
+                    "columnName": "Price",
+                    "clrType": "decimal",
+                    "storeType": "decimal(10,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 10,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Sku",
+                    "columnName": "Sku",
+                    "clrType": "string",
+                    "storeType": "nvarchar(32)",
+                    "isRequired": true,
+                    "maxLength": 32,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Stock",
+                    "columnName": "Stock",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Sku"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "ProductTag",
+                "fullName": "ProductTag",
+                "table": "ProductTag",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "ProductsId",
+                    "columnName": "ProductsId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "TagsId",
+                    "columnName": "TagsId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true,
+                    "isPrimaryKey": true
+                  }
+                ],
+                "primaryKey": [
+                  "ProductsId",
+                  "TagsId"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "TagsId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {},
+                "isJoinTable": true
+              },
+              {
+                "name": "Tag",
+                "fullName": "WebShop.Models.Tag",
+                "table": "Tags",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(50)",
+                    "isRequired": true,
+                    "maxLength": 50,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "Name"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 2,
+                "annotations": {}
+              }
+            ],
+            "relationships": [
+              {
+                "dependent": "ProductTag",
+                "principal": "WebShop.Models.Product",
+                "navigation": null,
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "ProductsId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "ProductTag",
+                "principal": "WebShop.Models.Tag",
+                "navigation": null,
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "TagsId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Category",
+                "principal": "WebShop.Models.Category",
+                "navigation": "ParentCategory",
+                "inverseNavigation": "Children",
+                "foreignKey": [
+                  "ParentCategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": null,
+                "isRequired": false
+              },
+              {
+                "dependent": "WebShop.Models.Order",
+                "principal": "WebShop.Models.Customer",
+                "navigation": "Customer",
+                "inverseNavigation": "Orders",
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Order",
+                "navigation": "Order",
+                "inverseNavigation": "Items",
+                "foreignKey": [
+                  "OrderId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Product",
+                "navigation": "Product",
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Category",
+                "navigation": "Category",
+                "inverseNavigation": "Products",
+                "foreignKey": [
+                  "CategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Tag",
+                "navigation": null,
+                "inverseNavigation": null,
+                "foreignKey": [],
+                "principalKey": [],
+                "type": "many-to-many",
+                "onDelete": "Cascade",
+                "isRequired": true,
+                "via": "ProductTag"
+              }
+            ]
+          },
+          "diff": {
+            "addedEntities": [
+              "ProductTag",
+              "WebShop.Models.Tag"
+            ],
+            "removedEntities": [],
+            "modifiedEntities": [],
+            "addedRelationships": [
+              {
+                "type": "many-to-one",
+                "dependent": "ProductTag",
+                "principal": "WebShop.Models.Product",
+                "foreignKey": [
+                  "ProductsId"
+                ],
+                "via": null,
+                "onDelete": "Cascade"
+              },
+              {
+                "type": "many-to-one",
+                "dependent": "ProductTag",
+                "principal": "WebShop.Models.Tag",
+                "foreignKey": [
+                  "TagsId"
+                ],
+                "via": null,
+                "onDelete": "Cascade"
+              },
+              {
+                "type": "many-to-many",
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Tag",
+                "foreignKey": [],
+                "via": "ProductTag",
+                "onDelete": "Cascade"
+              }
+            ],
+            "removedRelationships": [],
+            "changeCount": 5
+          }
+        },
+        {
+          "id": "20250620160800_AddReviewsAndAuditColumns",
+          "name": "AddReviewsAndAuditColumns",
+          "timestamp": "2025-06-20T16:08:00",
+          "filePath": "Migrations/20250620160800_AddReviewsAndAuditColumns.Designer.cs",
+          "model": {
+            "productVersion": "8.0.6",
+            "annotations": {
+              "ProductVersion": "8.0.6",
+              "Relational:MaxIdentifierLength": 128
+            },
+            "entities": [
+              {
+                "name": "Category",
+                "fullName": "WebShop.Models.Category",
+                "table": "Categories",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CreatedAt",
+                    "columnName": "CreatedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "ParentCategoryId",
+                    "columnName": "ParentCategoryId",
+                    "clrType": "int?",
+                    "storeType": "int",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Slug",
+                    "columnName": "Slug",
+                    "clrType": "string",
+                    "storeType": "nvarchar(120)",
+                    "isRequired": true,
+                    "maxLength": 120,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "ParentCategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Slug"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Customer",
+                "fullName": "WebShop.Models.Customer",
+                "table": "Customers",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CreatedAt",
+                    "columnName": "CreatedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Email",
+                    "columnName": "Email",
+                    "clrType": "string",
+                    "storeType": "nvarchar(256)",
+                    "isRequired": true,
+                    "maxLength": 256,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "FullName",
+                    "columnName": "FullName",
+                    "clrType": "string",
+                    "storeType": "nvarchar(150)",
+                    "isRequired": false,
+                    "maxLength": 150,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "LoyaltyPoints",
+                    "columnName": "LoyaltyPoints",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": 0,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Address.City",
+                    "columnName": "Address_City",
+                    "clrType": "string",
+                    "storeType": "nvarchar(100)",
+                    "isRequired": true,
+                    "maxLength": 100,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.Country",
+                    "columnName": "Address_Country",
+                    "clrType": "string",
+                    "storeType": "nvarchar(2)",
+                    "isRequired": true,
+                    "maxLength": 2,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.PostalCode",
+                    "columnName": "Address_PostalCode",
+                    "clrType": "string",
+                    "storeType": "nvarchar(16)",
+                    "isRequired": true,
+                    "maxLength": 16,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  },
+                  {
+                    "name": "Address.Street",
+                    "columnName": "Address_Street",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "owned": true
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "Email"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [
+                  {
+                    "type": "WebShop.Models.Address",
+                    "navigation": "Address",
+                    "kind": "one",
+                    "inline": true,
+                    "columns": [
+                      "Address_City",
+                      "Address_Country",
+                      "Address_PostalCode",
+                      "Address_Street"
+                    ]
+                  }
+                ],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Order",
+                "fullName": "WebShop.Models.Order",
+                "table": "Orders",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CustomerId",
+                    "columnName": "CustomerId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "OrderNumber",
+                    "columnName": "OrderNumber",
+                    "clrType": "string",
+                    "storeType": "nvarchar(20)",
+                    "isRequired": true,
+                    "maxLength": 20,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "PlacedAt",
+                    "columnName": "PlacedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Status",
+                    "columnName": "Status",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Total",
+                    "columnName": "Total",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CustomerId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "OrderNumber"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "OrderItem",
+                "fullName": "WebShop.Models.OrderItem",
+                "table": "OrderItems",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "OrderId",
+                    "columnName": "OrderId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "ProductId",
+                    "columnName": "ProductId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Quantity",
+                    "columnName": "Quantity",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "UnitPrice",
+                    "columnName": "UnitPrice",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "OrderId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "ProductId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Product",
+                "fullName": "WebShop.Models.Product",
+                "table": "Products",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "CategoryId",
+                    "columnName": "CategoryId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "CreatedAt",
+                    "columnName": "CreatedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Description",
+                    "columnName": "Description",
+                    "clrType": "string",
+                    "storeType": "nvarchar(max)",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "IsDiscontinued",
+                    "columnName": "IsDiscontinued",
+                    "clrType": "bool",
+                    "storeType": "bit",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValue": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(200)",
+                    "isRequired": true,
+                    "maxLength": 200,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Price",
+                    "columnName": "Price",
+                    "clrType": "decimal",
+                    "storeType": "decimal(18,2)",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": 18,
+                    "scale": 2,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "RowVersion",
+                    "columnName": "RowVersion",
+                    "clrType": "byte[]",
+                    "storeType": "rowversion",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAddOrUpdate",
+                    "isIdentity": false,
+                    "isConcurrencyToken": true,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Sku",
+                    "columnName": "Sku",
+                    "clrType": "string",
+                    "storeType": "nvarchar(32)",
+                    "isRequired": true,
+                    "maxLength": 32,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "Stock",
+                    "columnName": "Stock",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "UpdatedAt",
+                    "columnName": "UpdatedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CategoryId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "Sku"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "ProductTag",
+                "fullName": "ProductTag",
+                "table": "ProductTag",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "ProductsId",
+                    "columnName": "ProductsId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "TagsId",
+                    "columnName": "TagsId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true,
+                    "isPrimaryKey": true
+                  }
+                ],
+                "primaryKey": [
+                  "ProductsId",
+                  "TagsId"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "TagsId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {},
+                "isJoinTable": true
+              },
+              {
+                "name": "Review",
+                "fullName": "WebShop.Models.Review",
+                "table": "Reviews",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Body",
+                    "columnName": "Body",
+                    "clrType": "string",
+                    "storeType": "nvarchar(2000)",
+                    "isRequired": false,
+                    "maxLength": 2000,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "CreatedAt",
+                    "columnName": "CreatedAt",
+                    "clrType": "DateTime",
+                    "storeType": "datetime2",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  },
+                  {
+                    "name": "CustomerId",
+                    "columnName": "CustomerId",
+                    "clrType": "int?",
+                    "storeType": "int",
+                    "isRequired": false,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "ProductId",
+                    "columnName": "ProductId",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isForeignKey": true
+                  },
+                  {
+                    "name": "Rating",
+                    "columnName": "Rating",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "CustomerId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  },
+                  {
+                    "columns": [
+                      "ProductId"
+                    ],
+                    "isUnique": false,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 0,
+                "annotations": {}
+              },
+              {
+                "name": "Tag",
+                "fullName": "WebShop.Models.Tag",
+                "table": "Tags",
+                "schema": null,
+                "isView": false,
+                "columns": [
+                  {
+                    "name": "Id",
+                    "columnName": "Id",
+                    "clrType": "int",
+                    "storeType": "int",
+                    "isRequired": true,
+                    "maxLength": null,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": "OnAdd",
+                    "isIdentity": true,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null,
+                    "isPrimaryKey": true
+                  },
+                  {
+                    "name": "Name",
+                    "columnName": "Name",
+                    "clrType": "string",
+                    "storeType": "nvarchar(50)",
+                    "isRequired": true,
+                    "maxLength": 50,
+                    "precision": null,
+                    "scale": null,
+                    "valueGenerated": null,
+                    "isIdentity": false,
+                    "isConcurrencyToken": false,
+                    "defaultValueSql": null,
+                    "computedSql": null,
+                    "comment": null,
+                    "isUnicode": null
+                  }
+                ],
+                "primaryKey": [
+                  "Id"
+                ],
+                "alternateKeys": [],
+                "indexes": [
+                  {
+                    "columns": [
+                      "Name"
+                    ],
+                    "isUnique": true,
+                    "name": null,
+                    "filter": null
+                  }
+                ],
+                "discriminator": null,
+                "baseType": null,
+                "ownedTypes": [],
+                "seedCount": 2,
+                "annotations": {}
+              }
+            ],
+            "relationships": [
+              {
+                "dependent": "ProductTag",
+                "principal": "WebShop.Models.Product",
+                "navigation": null,
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "ProductsId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "ProductTag",
+                "principal": "WebShop.Models.Tag",
+                "navigation": null,
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "TagsId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Category",
+                "principal": "WebShop.Models.Category",
+                "navigation": "ParentCategory",
+                "inverseNavigation": "Children",
+                "foreignKey": [
+                  "ParentCategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": null,
+                "isRequired": false
+              },
+              {
+                "dependent": "WebShop.Models.Order",
+                "principal": "WebShop.Models.Customer",
+                "navigation": "Customer",
+                "inverseNavigation": "Orders",
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Order",
+                "navigation": "Order",
+                "inverseNavigation": "Items",
+                "foreignKey": [
+                  "OrderId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.OrderItem",
+                "principal": "WebShop.Models.Product",
+                "navigation": "Product",
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Restrict",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Category",
+                "navigation": "Category",
+                "inverseNavigation": "Products",
+                "foreignKey": [
+                  "CategoryId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Review",
+                "principal": "WebShop.Models.Customer",
+                "navigation": "Customer",
+                "inverseNavigation": null,
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "SetNull",
+                "isRequired": false
+              },
+              {
+                "dependent": "WebShop.Models.Review",
+                "principal": "WebShop.Models.Product",
+                "navigation": "Product",
+                "inverseNavigation": "Reviews",
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "principalKey": [],
+                "type": "many-to-one",
+                "onDelete": "Cascade",
+                "isRequired": true
+              },
+              {
+                "dependent": "WebShop.Models.Product",
+                "principal": "WebShop.Models.Tag",
+                "navigation": null,
+                "inverseNavigation": null,
+                "foreignKey": [],
+                "principalKey": [],
+                "type": "many-to-many",
+                "onDelete": "Cascade",
+                "isRequired": true,
+                "via": "ProductTag"
+              }
+            ]
+          },
+          "diff": {
+            "addedEntities": [
+              "WebShop.Models.Review"
+            ],
+            "removedEntities": [],
+            "modifiedEntities": [
+              {
+                "entity": "WebShop.Models.Category",
+                "name": "Category",
+                "addedColumns": [
+                  "CreatedAt"
+                ],
+                "removedColumns": [],
+                "modifiedColumns": [],
+                "addedIndexes": [],
+                "removedIndexes": [],
+                "tableChanged": null
+              },
+              {
+                "entity": "WebShop.Models.Customer",
+                "name": "Customer",
+                "addedColumns": [
+                  "CreatedAt"
+                ],
+                "removedColumns": [],
+                "modifiedColumns": [],
+                "addedIndexes": [],
+                "removedIndexes": [],
+                "tableChanged": null
+              },
+              {
+                "entity": "WebShop.Models.Product",
+                "name": "Product",
+                "addedColumns": [
+                  "CreatedAt",
+                  "RowVersion",
+                  "UpdatedAt"
+                ],
+                "removedColumns": [
+                  "LegacyCode"
+                ],
+                "modifiedColumns": [
+                  {
+                    "column": "Price",
+                    "changes": [
+                      {
+                        "field": "storeType",
+                        "from": "decimal(10,2)",
+                        "to": "decimal(18,2)"
+                      },
+                      {
+                        "field": "precision",
+                        "from": 10,
+                        "to": 18
+                      }
+                    ]
+                  }
+                ],
+                "addedIndexes": [],
+                "removedIndexes": [],
+                "tableChanged": null
+              }
+            ],
+            "addedRelationships": [
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.Review",
+                "principal": "WebShop.Models.Customer",
+                "foreignKey": [
+                  "CustomerId"
+                ],
+                "via": null,
+                "onDelete": "SetNull"
+              },
+              {
+                "type": "many-to-one",
+                "dependent": "WebShop.Models.Review",
+                "principal": "WebShop.Models.Product",
+                "foreignKey": [
+                  "ProductId"
+                ],
+                "via": null,
+                "onDelete": "Cascade"
+              }
+            ],
+            "removedRelationships": [],
+            "changeCount": 10
+          }
+        }
+      ],
+      "currentModel": {
+        "productVersion": "8.0.6",
+        "annotations": {
+          "ProductVersion": "8.0.6",
+          "Relational:MaxIdentifierLength": 128
+        },
+        "entities": [
+          {
+            "name": "Category",
+            "fullName": "WebShop.Models.Category",
+            "table": "Categories",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "CreatedAt",
+                "columnName": "CreatedAt",
+                "clrType": "DateTime",
+                "storeType": "datetime2",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Name",
+                "columnName": "Name",
+                "clrType": "string",
+                "storeType": "nvarchar(100)",
+                "isRequired": true,
+                "maxLength": 100,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "ParentCategoryId",
+                "columnName": "ParentCategoryId",
+                "clrType": "int?",
+                "storeType": "int",
+                "isRequired": false,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "Slug",
+                "columnName": "Slug",
+                "clrType": "string",
+                "storeType": "nvarchar(120)",
+                "isRequired": true,
+                "maxLength": 120,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "ParentCategoryId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              },
+              {
+                "columns": [
+                  "Slug"
+                ],
+                "isUnique": true,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 0,
+            "annotations": {}
+          },
+          {
+            "name": "Customer",
+            "fullName": "WebShop.Models.Customer",
+            "table": "Customers",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "CreatedAt",
+                "columnName": "CreatedAt",
+                "clrType": "DateTime",
+                "storeType": "datetime2",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Email",
+                "columnName": "Email",
+                "clrType": "string",
+                "storeType": "nvarchar(256)",
+                "isRequired": true,
+                "maxLength": 256,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "FullName",
+                "columnName": "FullName",
+                "clrType": "string",
+                "storeType": "nvarchar(150)",
+                "isRequired": false,
+                "maxLength": 150,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "LoyaltyPoints",
+                "columnName": "LoyaltyPoints",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValue": 0,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Address.City",
+                "columnName": "Address_City",
+                "clrType": "string",
+                "storeType": "nvarchar(100)",
+                "isRequired": true,
+                "maxLength": 100,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "owned": true
+              },
+              {
+                "name": "Address.Country",
+                "columnName": "Address_Country",
+                "clrType": "string",
+                "storeType": "nvarchar(2)",
+                "isRequired": true,
+                "maxLength": 2,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "owned": true
+              },
+              {
+                "name": "Address.PostalCode",
+                "columnName": "Address_PostalCode",
+                "clrType": "string",
+                "storeType": "nvarchar(16)",
+                "isRequired": true,
+                "maxLength": 16,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "owned": true
+              },
+              {
+                "name": "Address.Street",
+                "columnName": "Address_Street",
+                "clrType": "string",
+                "storeType": "nvarchar(200)",
+                "isRequired": true,
+                "maxLength": 200,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "owned": true
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "Email"
+                ],
+                "isUnique": true,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [
+              {
+                "type": "WebShop.Models.Address",
+                "navigation": "Address",
+                "kind": "one",
+                "inline": true,
+                "columns": [
+                  "Address_City",
+                  "Address_Country",
+                  "Address_PostalCode",
+                  "Address_Street"
+                ]
+              }
+            ],
+            "seedCount": 0,
+            "annotations": {}
+          },
+          {
+            "name": "Order",
+            "fullName": "WebShop.Models.Order",
+            "table": "Orders",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "CustomerId",
+                "columnName": "CustomerId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "OrderNumber",
+                "columnName": "OrderNumber",
+                "clrType": "string",
+                "storeType": "nvarchar(20)",
+                "isRequired": true,
+                "maxLength": 20,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "PlacedAt",
+                "columnName": "PlacedAt",
+                "clrType": "DateTime",
+                "storeType": "datetime2",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Status",
+                "columnName": "Status",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Total",
+                "columnName": "Total",
+                "clrType": "decimal",
+                "storeType": "decimal(18,2)",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": 18,
+                "scale": 2,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "CustomerId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              },
+              {
+                "columns": [
+                  "OrderNumber"
+                ],
+                "isUnique": true,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 0,
+            "annotations": {}
+          },
+          {
+            "name": "OrderItem",
+            "fullName": "WebShop.Models.OrderItem",
+            "table": "OrderItems",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "OrderId",
+                "columnName": "OrderId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "ProductId",
+                "columnName": "ProductId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "Quantity",
+                "columnName": "Quantity",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "UnitPrice",
+                "columnName": "UnitPrice",
+                "clrType": "decimal",
+                "storeType": "decimal(18,2)",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": 18,
+                "scale": 2,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "OrderId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              },
+              {
+                "columns": [
+                  "ProductId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 0,
+            "annotations": {}
+          },
+          {
+            "name": "Product",
+            "fullName": "WebShop.Models.Product",
+            "table": "Products",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "CategoryId",
+                "columnName": "CategoryId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "CreatedAt",
+                "columnName": "CreatedAt",
+                "clrType": "DateTime",
+                "storeType": "datetime2",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Description",
+                "columnName": "Description",
+                "clrType": "string",
+                "storeType": "nvarchar(max)",
+                "isRequired": false,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "IsDiscontinued",
+                "columnName": "IsDiscontinued",
+                "clrType": "bool",
+                "storeType": "bit",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValue": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Name",
+                "columnName": "Name",
+                "clrType": "string",
+                "storeType": "nvarchar(200)",
+                "isRequired": true,
+                "maxLength": 200,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Price",
+                "columnName": "Price",
+                "clrType": "decimal",
+                "storeType": "decimal(18,2)",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": 18,
+                "scale": 2,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "RowVersion",
+                "columnName": "RowVersion",
+                "clrType": "byte[]",
+                "storeType": "rowversion",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAddOrUpdate",
+                "isIdentity": false,
+                "isConcurrencyToken": true,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Sku",
+                "columnName": "Sku",
+                "clrType": "string",
+                "storeType": "nvarchar(32)",
+                "isRequired": true,
+                "maxLength": 32,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "Stock",
+                "columnName": "Stock",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "UpdatedAt",
+                "columnName": "UpdatedAt",
+                "clrType": "DateTime",
+                "storeType": "datetime2",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "CategoryId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              },
+              {
+                "columns": [
+                  "Sku"
+                ],
+                "isUnique": true,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 0,
+            "annotations": {}
+          },
+          {
+            "name": "ProductTag",
+            "fullName": "ProductTag",
+            "table": "ProductTag",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "ProductsId",
+                "columnName": "ProductsId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "TagsId",
+                "columnName": "TagsId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true,
+                "isPrimaryKey": true
+              }
+            ],
+            "primaryKey": [
+              "ProductsId",
+              "TagsId"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "TagsId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 0,
+            "annotations": {},
+            "isJoinTable": true
+          },
+          {
+            "name": "Review",
+            "fullName": "WebShop.Models.Review",
+            "table": "Reviews",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "Body",
+                "columnName": "Body",
+                "clrType": "string",
+                "storeType": "nvarchar(2000)",
+                "isRequired": false,
+                "maxLength": 2000,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "CreatedAt",
+                "columnName": "CreatedAt",
+                "clrType": "DateTime",
+                "storeType": "datetime2",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              },
+              {
+                "name": "CustomerId",
+                "columnName": "CustomerId",
+                "clrType": "int?",
+                "storeType": "int",
+                "isRequired": false,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "ProductId",
+                "columnName": "ProductId",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isForeignKey": true
+              },
+              {
+                "name": "Rating",
+                "columnName": "Rating",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "CustomerId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              },
+              {
+                "columns": [
+                  "ProductId"
+                ],
+                "isUnique": false,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 0,
+            "annotations": {}
+          },
+          {
+            "name": "Tag",
+            "fullName": "WebShop.Models.Tag",
+            "table": "Tags",
+            "schema": null,
+            "isView": false,
+            "columns": [
+              {
+                "name": "Id",
+                "columnName": "Id",
+                "clrType": "int",
+                "storeType": "int",
+                "isRequired": true,
+                "maxLength": null,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": "OnAdd",
+                "isIdentity": true,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null,
+                "isPrimaryKey": true
+              },
+              {
+                "name": "Name",
+                "columnName": "Name",
+                "clrType": "string",
+                "storeType": "nvarchar(50)",
+                "isRequired": true,
+                "maxLength": 50,
+                "precision": null,
+                "scale": null,
+                "valueGenerated": null,
+                "isIdentity": false,
+                "isConcurrencyToken": false,
+                "defaultValueSql": null,
+                "computedSql": null,
+                "comment": null,
+                "isUnicode": null
+              }
+            ],
+            "primaryKey": [
+              "Id"
+            ],
+            "alternateKeys": [],
+            "indexes": [
+              {
+                "columns": [
+                  "Name"
+                ],
+                "isUnique": true,
+                "name": null,
+                "filter": null
+              }
+            ],
+            "discriminator": null,
+            "baseType": null,
+            "ownedTypes": [],
+            "seedCount": 2,
+            "annotations": {}
+          }
+        ],
+        "relationships": [
+          {
+            "dependent": "ProductTag",
+            "principal": "WebShop.Models.Product",
+            "navigation": null,
+            "inverseNavigation": null,
+            "foreignKey": [
+              "ProductsId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Cascade",
+            "isRequired": true
+          },
+          {
+            "dependent": "ProductTag",
+            "principal": "WebShop.Models.Tag",
+            "navigation": null,
+            "inverseNavigation": null,
+            "foreignKey": [
+              "TagsId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Cascade",
+            "isRequired": true
+          },
+          {
+            "dependent": "WebShop.Models.Category",
+            "principal": "WebShop.Models.Category",
+            "navigation": "ParentCategory",
+            "inverseNavigation": "Children",
+            "foreignKey": [
+              "ParentCategoryId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": null,
+            "isRequired": false
+          },
+          {
+            "dependent": "WebShop.Models.Order",
+            "principal": "WebShop.Models.Customer",
+            "navigation": "Customer",
+            "inverseNavigation": "Orders",
+            "foreignKey": [
+              "CustomerId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Restrict",
+            "isRequired": true
+          },
+          {
+            "dependent": "WebShop.Models.OrderItem",
+            "principal": "WebShop.Models.Order",
+            "navigation": "Order",
+            "inverseNavigation": "Items",
+            "foreignKey": [
+              "OrderId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Cascade",
+            "isRequired": true
+          },
+          {
+            "dependent": "WebShop.Models.OrderItem",
+            "principal": "WebShop.Models.Product",
+            "navigation": "Product",
+            "inverseNavigation": null,
+            "foreignKey": [
+              "ProductId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Restrict",
+            "isRequired": true
+          },
+          {
+            "dependent": "WebShop.Models.Product",
+            "principal": "WebShop.Models.Category",
+            "navigation": "Category",
+            "inverseNavigation": "Products",
+            "foreignKey": [
+              "CategoryId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Cascade",
+            "isRequired": true
+          },
+          {
+            "dependent": "WebShop.Models.Review",
+            "principal": "WebShop.Models.Customer",
+            "navigation": "Customer",
+            "inverseNavigation": null,
+            "foreignKey": [
+              "CustomerId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "SetNull",
+            "isRequired": false
+          },
+          {
+            "dependent": "WebShop.Models.Review",
+            "principal": "WebShop.Models.Product",
+            "navigation": "Product",
+            "inverseNavigation": "Reviews",
+            "foreignKey": [
+              "ProductId"
+            ],
+            "principalKey": [],
+            "type": "many-to-one",
+            "onDelete": "Cascade",
+            "isRequired": true
+          },
+          {
+            "dependent": "WebShop.Models.Product",
+            "principal": "WebShop.Models.Tag",
+            "navigation": null,
+            "inverseNavigation": null,
+            "foreignKey": [],
+            "principalKey": [],
+            "type": "many-to-many",
+            "onDelete": "Cascade",
+            "isRequired": true,
+            "via": "ProductTag"
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": []
+}

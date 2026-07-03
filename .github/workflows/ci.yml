@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  node:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,3 +29,46 @@ jobs:
         with:
           name: example-diagrams
           path: /tmp/*.html
+
+  dotnet:
+    runs-on: ubuntu-latest
+    name: .NET tool
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Test (includes JSON parity check against the Node reference)
+        run: dotnet test dotnet/AutoEntityDiagram.sln -c Release
+      - name: Pack the global tool
+        run: dotnet pack dotnet/AutoEntityDiagram/AutoEntityDiagram.csproj -c Release -o nupkg
+      - name: Install and smoke-test the packed tool
+        run: |
+          dotnet tool install --global --add-source nupkg AutoEntityDiagram
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          aed examples/WebShop -o /tmp/cs-webshop.html
+          aed examples/MinimalTodo -o /tmp/cs-todo.html
+
+  parity:
+    runs-on: ubuntu-latest
+    name: Node ↔ .NET output parity
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Generate JSON from both tools and compare
+        run: |
+          node bin/auto-entity-diagram.js examples/WebShop --json /tmp/node.json -o /tmp/n.html -q
+          dotnet run --project dotnet/AutoEntityDiagram -c Release -- examples/WebShop --json /tmp/cs.json -o /tmp/c.html -q
+          node -e '
+            const fs = require("fs");
+            const norm = (o) => { o.generatedAt = ""; o.root = ""; return o; };
+            const a = JSON.stringify(norm(JSON.parse(fs.readFileSync("/tmp/node.json"))));
+            const b = JSON.stringify(norm(JSON.parse(fs.readFileSync("/tmp/cs.json"))));
+            if (a !== b) { console.error("Node and .NET JSON differ"); process.exit(1); }
+            console.log("Node and .NET output are identical");
+          '

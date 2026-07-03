@@ -10,8 +10,11 @@ diagram with a **migration timeline** you can scrub back and forth.
 
 [![CI](https://github.com/thedigitaljedi86/AutoEntityDiagram/actions/workflows/ci.yml/badge.svg)](https://github.com/thedigitaljedi86/AutoEntityDiagram/actions/workflows/ci.yml)
 [![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)](package.json)
+[![.NET tool](https://img.shields.io/badge/dotnet%20tool-net8.0-512bd4)](dotnet/)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![zero dependencies](https://img.shields.io/badge/dependencies-0-orange)](package.json)
+
+Available both as an **npm CLI** and a **.NET global tool** — same engine, same output.
 
 <img src="docs/screenshots/overview-light.png" alt="Interactive ER diagram, light theme" width="900">
 
@@ -37,6 +40,18 @@ Just static analysis of the code you already have.
 
 ## Getting started
 
+Pick whichever runtime you already have — the two front ends share one engine and produce
+byte-for-byte identical diagrams (enforced by a parity check in CI).
+
+**.NET global tool** (natural for EF Core projects — no Node required):
+
+```bash
+dotnet tool install -g AutoEntityDiagram
+aed path/to/your/solution --open
+```
+
+**npm CLI:**
+
 ```bash
 # no install needed
 npx auto-entity-diagram path/to/your/solution
@@ -46,7 +61,7 @@ npm install -g auto-entity-diagram
 aed path/to/your/solution --open
 ```
 
-That's it. Open `entity-diagram.html` in a browser.
+Either way, open `entity-diagram.html` in a browser.
 
 **When new migrations land**, just run the same command again — the diagram is rebuilt
 from the current state of the code in milliseconds:
@@ -55,8 +70,9 @@ from the current state of the code in milliseconds:
 aed .        # refresh to the newest overview
 ```
 
-> **Requirements:** Node.js ≥ 18. Your project does **not** need to compile — parsing is
-> purely static, so it works on any machine with the source checked out.
+> **Requirements:** either Node.js ≥ 18 **or** the .NET 8 SDK — you don't need both.
+> Your project does **not** need to compile: parsing is purely static, so it works on any
+> machine with the source checked out.
 
 ## What you get
 
@@ -135,6 +151,10 @@ per-migration snapshots and diffs) if you want to build your own tooling on top.
 4. **Emit** — model + diffs are embedded as JSON in a self-contained HTML viewer
    (vanilla JS + SVG, no CDN, no tracking, works offline).
 
+The npm CLI and the .NET tool are two independent implementations of steps 1–4 over the
+**same viewer assets** (`src/viewer/`). A parity test regenerates the model with both and
+asserts the JSON is identical, so switching runtimes never changes your diagram.
+
 ### No migrations? No problem
 
 If a `DbContext` has no migrations, the model is reconstructed from your entity classes
@@ -153,7 +173,12 @@ columns, and a dropped legacy column:
 ```bash
 git clone https://github.com/thedigitaljedi86/AutoEntityDiagram.git
 cd AutoEntityDiagram
+
+# with Node
 node bin/auto-entity-diagram.js examples/WebShop -o webshop.html --open
+
+# …or with .NET
+dotnet run --project dotnet/AutoEntityDiagram -- examples/WebShop -o webshop.html --open
 ```
 
 Or just open [`docs/demo/webshop.html`](docs/demo/webshop.html) from a checkout.
@@ -193,20 +218,33 @@ Or just open [`docs/demo/webshop.html`](docs/demo/webshop.html) from a checkout.
 Issues and PRs are very welcome. The codebase is small and dependency-free:
 
 ```
-bin/auto-entity-diagram.js   CLI
-src/scan.js                  workspace discovery
-src/csharp.js                minimal C# lexing helpers
-src/snapshotParser.js        migration Designer / ModelSnapshot parser
-src/sourceParser.js          convention-based fallback (no migrations)
-src/diff.js                  model-to-model structural diff
-src/emit.js + src/viewer/    the interactive HTML viewer
-test/                        node:test suites
+bin/auto-entity-diagram.js       npm CLI
+src/scan.js                      workspace discovery
+src/csharp.js                    minimal C# lexing helpers
+src/snapshotParser.js            migration Designer / ModelSnapshot parser
+src/sourceParser.js              convention-based fallback (no migrations)
+src/diff.js                      model-to-model structural diff
+src/emit.js + src/viewer/        the interactive HTML viewer (shared by both tools)
+test/                            node:test suites
+
+dotnet/AutoEntityDiagram/        the .NET global tool — a C# port of the same
+                                 scan → parse → diff → emit pipeline, embedding
+                                 the shared src/viewer/ assets
+dotnet/AutoEntityDiagram.Tests/  xunit suites, incl. a JSON parity test that
+                                 asserts identical output to the Node reference
 ```
 
 ```bash
-node --test        # run the tests
-npm run demo       # rebuild docs/demo/webshop.html
+node --test                         # run the Node tests
+npm run demo                        # rebuild docs/demo/webshop.html
+
+dotnet test dotnet/AutoEntityDiagram.sln   # run the .NET tests (+ parity check)
 ```
+
+When you change a parser, keep the two implementations in step: the parity test in
+`dotnet/AutoEntityDiagram.Tests` will fail if the .NET output drifts from the Node
+reference fixture (regenerate it with `node bin/auto-entity-diagram.js examples/WebShop
+--json dotnet/AutoEntityDiagram.Tests/fixtures/webshop.node.json`).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
