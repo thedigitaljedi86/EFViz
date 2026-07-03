@@ -70,3 +70,8 @@ part of the model output.
 - TPT / TPC inheritance edges
 - Sequences, check constraints, triggers from migration operations
 - Localization of the viewer UI
+
+## Releasing
+
+Maintainers: see [PUBLISHING.md](PUBLISHING.md) for how to publish the .NET global tool to
+NuGet (tag-triggered GitHub Actions release) and the npm package.

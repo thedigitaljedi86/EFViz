@@ -9,8 +9,8 @@ and generates a single self-contained HTML file: a modern, interactive entity-re
 diagram with a **migration timeline** you can scrub back and forth.
 
 [![CI](https://github.com/thedigitaljedi86/EFViz/actions/workflows/ci.yml/badge.svg)](https://github.com/thedigitaljedi86/EFViz/actions/workflows/ci.yml)
-[![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)](package.json)
-[![.NET tool](https://img.shields.io/badge/dotnet%20tool-net8.0-512bd4)](dotnet/)
+[![NuGet](https://img.shields.io/nuget/v/EFViz?logo=nuget&label=NuGet)](https://www.nuget.org/packages/EFViz)
+[![npm](https://img.shields.io/npm/v/efviz?logo=npm)](https://www.npmjs.com/package/efviz)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![zero dependencies](https://img.shields.io/badge/dependencies-0-orange)](package.json)
 

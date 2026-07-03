@@ -9,17 +9,31 @@
     <RootNamespace>EFViz</RootNamespace>
     <InvariantGlobalization>true</InvariantGlobalization>
 
+    <!-- Packaging: `dotnet tool install -g EFViz` installs the `scan` command. -->
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>scan</ToolCommandName>
     <PackageId>EFViz</PackageId>
     <Version>1.0.0</Version>
     <Authors>EFViz contributors</Authors>
-    <Description>Zero-config interactive ER diagrams for Entity Framework Core. Scans your workspace for DbContexts and migrations, then generates a self-contained HTML diagram with a migration timeline. No build or database connection required.</Description>
-    <PackageTags>entity-framework;ef-core;er-diagram;database-diagram;dbcontext;migrations;visualization</PackageTags>
+    <Company>EFViz</Company>
+    <Product>EFViz</Product>
+    <Copyright>Copyright (c) EFViz contributors</Copyright>
+    <Description>Zero-config interactive ER diagrams for Entity Framework Core. Scans your workspace for DbContexts and migrations, then generates a self-contained HTML diagram with a migration timeline you can scrub back and forth. No build or database connection required — run `scan` and open the HTML.</Description>
+    <PackageTags>entity-framework;ef-core;er-diagram;database-diagram;dbcontext;migrations;visualization;dotnet-tool;erd</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/thedigitaljedi86/EFViz</PackageProjectUrl>
     <RepositoryUrl>https://github.com/thedigitaljedi86/EFViz</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>See https://github.com/thedigitaljedi86/EFViz/releases</PackageReleaseNotes>
+
+    <!-- Reproducible builds + Source Link for a debuggable published package. -->
+    <Deterministic>true</Deterministic>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +42,11 @@
     <EmbeddedResource Include="..\..\src\viewer\styles.css" LogicalName="viewer.styles.css" />
     <EmbeddedResource Include="..\..\src\viewer\app.js" LogicalName="viewer.app.js" />
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

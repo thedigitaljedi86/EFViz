@@ -1,0 +1,53 @@
+name: Release to NuGet
+
+# Publishes the EFViz global tool to nuget.org when a version tag is pushed,
+# e.g.  git tag v1.0.0 && git push origin v1.0.0
+#
+# Requires one repository secret:  NUGET_API_KEY
+#   (nuget.org → account → API Keys → create a key scoped to Push for EFViz)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # for creating the GitHub Release
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history so Source Link resolves commits
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Derive version from tag
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Test
+        run: dotnet test dotnet/EFViz.sln -c Release
+
+      - name: Pack
+        run: |
+          dotnet pack dotnet/EFViz/EFViz.csproj -c Release \
+            -p:Version=${{ steps.ver.outputs.version }} \
+            -p:ContinuousIntegrationBuild=true \
+            -o artifacts
+
+      - name: Push to NuGet
+        run: |
+          dotnet nuget push "artifacts/*.nupkg" \
+            --api-key "${{ secrets.NUGET_API_KEY }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*.nupkg
+          generate_release_notes: true
