@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace AutoEntityDiagram.Tests;
+namespace EFViz.Tests;
 
 public class SourceParserTests
 {

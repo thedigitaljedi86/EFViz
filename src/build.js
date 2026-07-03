@@ -104,7 +104,7 @@ export function buildDiagramData(root, options = {}) {
   }
 
   return {
-    tool: 'AutoEntityDiagram',
+    tool: 'EFViz',
     generatedAt: new Date().toISOString(),
     root: root,
     contexts,

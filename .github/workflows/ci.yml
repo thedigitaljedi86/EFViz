@@ -21,8 +21,8 @@ jobs:
         run: node --test
       - name: Generate example diagram
         run: |
-          node bin/auto-entity-diagram.js examples/WebShop -o /tmp/webshop.html --json /tmp/webshop.json
-          node bin/auto-entity-diagram.js examples/MinimalTodo -o /tmp/todo.html
+          node bin/efviz.js examples/WebShop -o /tmp/webshop.html --json /tmp/webshop.json
+          node bin/efviz.js examples/MinimalTodo -o /tmp/todo.html
       - name: Upload example artifact
         if: matrix.node == 22
         uses: actions/upload-artifact@v4
@@ -39,15 +39,15 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Test (includes JSON parity check against the Node reference)
-        run: dotnet test dotnet/AutoEntityDiagram.sln -c Release
+        run: dotnet test dotnet/EFViz.sln -c Release
       - name: Pack the global tool
-        run: dotnet pack dotnet/AutoEntityDiagram/AutoEntityDiagram.csproj -c Release -o nupkg
+        run: dotnet pack dotnet/EFViz/EFViz.csproj -c Release -o nupkg
       - name: Install and smoke-test the packed tool
         run: |
-          dotnet tool install --global --add-source nupkg AutoEntityDiagram
+          dotnet tool install --global --add-source nupkg EFViz
           export PATH="$PATH:$HOME/.dotnet/tools"
-          aed examples/WebShop -o /tmp/cs-webshop.html
-          aed examples/MinimalTodo -o /tmp/cs-todo.html
+          scan examples/WebShop -o /tmp/cs-webshop.html
+          scan examples/MinimalTodo -o /tmp/cs-todo.html
 
   parity:
     runs-on: ubuntu-latest
@@ -62,8 +62,8 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Generate JSON from both tools and compare
         run: |
-          node bin/auto-entity-diagram.js examples/WebShop --json /tmp/node.json -o /tmp/n.html -q
-          dotnet run --project dotnet/AutoEntityDiagram -c Release -- examples/WebShop --json /tmp/cs.json -o /tmp/c.html -q
+          node bin/efviz.js examples/WebShop --json /tmp/node.json -o /tmp/n.html -q
+          dotnet run --project dotnet/EFViz -c Release -- examples/WebShop --json /tmp/cs.json -o /tmp/c.html -q
           node -e '
             const fs = require("fs");
             const norm = (o) => { o.generatedAt = ""; o.root = ""; return o; };

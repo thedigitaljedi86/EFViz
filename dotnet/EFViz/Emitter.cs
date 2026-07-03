@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Text.Json;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 /// <summary>
 /// Emits the final self-contained HTML file. Template, styles and the viewer

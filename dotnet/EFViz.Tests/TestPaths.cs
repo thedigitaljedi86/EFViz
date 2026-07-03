@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace AutoEntityDiagram.Tests;
+namespace EFViz.Tests;
 
 /// <summary>Locates the repo's shared example projects from the test binary.</summary>
 public static class TestPaths
@@ -16,7 +16,7 @@ public static class TestPaths
 
     private static string FindRepoRoot([CallerFilePath] string thisFile = "")
     {
-        // …/dotnet/AutoEntityDiagram.Tests/TestPaths.cs → repo root is two levels up.
+        // …/dotnet/EFViz.Tests/TestPaths.cs → repo root is two levels up.
         var dir = Path.GetDirectoryName(thisFile)!;
         return Path.GetFullPath(Path.Combine(dir, "..", ".."));
     }

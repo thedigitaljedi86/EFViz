@@ -1,4 +1,4 @@
-# Contributing to AutoEntityDiagram
+# Contributing to EFViz
 
 Thanks for your interest! This project aims to stay **small, fast, and dependency-free**.
 
@@ -8,9 +8,9 @@ You only need Node.js ≥ 18 — there is nothing to install:
 
 ```bash
 git clone https://github.com/thedigitaljedi86/AutoEntityDiagram.git
-cd AutoEntityDiagram
+cd EFViz
 node --test                                          # run the test suite
-node bin/auto-entity-diagram.js examples/WebShop \
+node bin/efviz.js examples/WebShop \
   -o /tmp/webshop.html                               # try it on the sample project
 ```
 
@@ -18,7 +18,7 @@ node bin/auto-entity-diagram.js examples/WebShop \
 
 | Path | Purpose |
 | --- | --- |
-| `bin/auto-entity-diagram.js` | CLI entry point (arg parsing, orchestration) |
+| `bin/efviz.js` | CLI entry point (arg parsing, orchestration) |
 | `src/scan.js` | Workspace walking; discovery of DbContexts, designers, snapshots |
 | `src/csharp.js` | String-aware C# lexing helpers (comments, balanced blocks, fluent chains) |
 | `src/snapshotParser.js` | Parses EF Core generated `*.Designer.cs` / `*ModelSnapshot.cs` |
@@ -29,8 +29,8 @@ node bin/auto-entity-diagram.js examples/WebShop \
 | `src/viewer/` | The interactive viewer (template.html, styles.css, app.js) |
 | `examples/` | Sample projects used by tests, docs, and screenshots |
 | `test/` | `node:test` suites |
-| `dotnet/AutoEntityDiagram/` | The .NET global tool — a C# port of the same pipeline that embeds and reuses `src/viewer/` |
-| `dotnet/AutoEntityDiagram.Tests/` | xunit suites, including a JSON parity test vs. the Node reference |
+| `dotnet/EFViz/` | The .NET global tool — a C# port of the same pipeline that embeds and reuses `src/viewer/` |
+| `dotnet/EFViz.Tests/` | xunit suites, including a JSON parity test vs. the Node reference |
 
 ### Two implementations, one output
 
@@ -41,8 +41,8 @@ depends on which runtime generated it. **If you fix a parser, apply the equivale
 to both** and regenerate the reference fixture:
 
 ```bash
-node bin/auto-entity-diagram.js examples/WebShop \
-  --json dotnet/AutoEntityDiagram.Tests/fixtures/webshop.node.json -o /dev/null
+node bin/efviz.js examples/WebShop \
+  --json dotnet/EFViz.Tests/fixtures/webshop.node.json -o /dev/null
 # then trim the volatile generatedAt/root fields to "" before committing
 ```
 
@@ -53,7 +53,7 @@ node bin/auto-entity-diagram.js examples/WebShop \
 - **Add a test** when you fix a parser bug: extend the example projects (or add a fixture
   string) so the regression is covered.
 - Parsers should **degrade gracefully**: unknown fluent calls are ignored, never fatal.
-- Run `node --test` **and** `dotnet test dotnet/AutoEntityDiagram.sln` before opening a
+- Run `node --test` **and** `dotnet test dotnet/EFViz.sln` before opening a
   PR; CI runs the Node suite on 18/20/22, the .NET suite on net8.0, and a cross-runtime
   parity check.
 

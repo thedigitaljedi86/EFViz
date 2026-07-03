@@ -6,4 +6,4 @@ var options = new DbContextOptionsBuilder<ShopContext>()
     .Options;
 
 using var db = new ShopContext(options);
-Console.WriteLine($"WebShop sample for AutoEntityDiagram — {db.Model.GetEntityTypes().Count()} entity types in the model.");
+Console.WriteLine($"WebShop sample for EFViz — {db.Model.GetEntityTypes().Count()} entity types in the model.");

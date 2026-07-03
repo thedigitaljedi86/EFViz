@@ -48,7 +48,7 @@ test('emitHtml produces a self-contained page with embedded data', () => {
   assert.ok(!html.includes('__STYLES__'));
   assert.ok(!html.includes('__APP__'));
   // Data survives a round-trip through the embedded script tag.
-  const m = /<script id="aed-data" type="application\/json">\s*([\s\S]*?)\s*<\/script>/.exec(html);
+  const m = /<script id="efviz-data" type="application\/json">\s*([\s\S]*?)\s*<\/script>/.exec(html);
   assert.ok(m);
   const parsed = JSON.parse(m[1]);
   assert.equal(parsed.contexts[0].name, 'ShopContext');

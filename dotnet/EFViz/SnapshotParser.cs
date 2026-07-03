@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using static AutoEntityDiagram.CSharpLex;
+using static EFViz.CSharpLex;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 public sealed record MigrationMeta(string Id, string Name, string? Timestamp, string? ContextType);
 

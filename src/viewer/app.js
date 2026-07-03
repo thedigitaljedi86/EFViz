@@ -1,8 +1,8 @@
-/* AutoEntityDiagram interactive viewer */
+/* EFViz interactive viewer */
 (() => {
   'use strict';
 
-  const DATA = JSON.parse(document.getElementById('aed-data').textContent);
+  const DATA = JSON.parse(document.getElementById('efviz-data').textContent);
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
   const $ = (id) => document.getElementById(id);
@@ -15,7 +15,7 @@
   const store = {
     get(key, fallback) {
       try {
-        const v = localStorage.getItem('aed:' + key);
+        const v = localStorage.getItem('efviz:' + key);
         return v === null ? fallback : JSON.parse(v);
       } catch {
         return fallback;
@@ -23,7 +23,7 @@
     },
     set(key, value) {
       try {
-        localStorage.setItem('aed:' + key, JSON.stringify(value));
+        localStorage.setItem('efviz:' + key, JSON.stringify(value));
       } catch { /* private mode */ }
     },
   };
@@ -1257,7 +1257,7 @@
     syncAccentSwatches();
     render(true);
     fitToView();
-    if (DATA.warnings?.length) console.warn('AutoEntityDiagram warnings:', DATA.warnings);
+    if (DATA.warnings?.length) console.warn('EFViz warnings:', DATA.warnings);
   }
 
   boot();

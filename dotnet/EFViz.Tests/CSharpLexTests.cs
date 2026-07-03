@@ -1,7 +1,7 @@
 using Xunit;
-using static AutoEntityDiagram.CSharpLex;
+using static EFViz.CSharpLex;
 
-namespace AutoEntityDiagram.Tests;
+namespace EFViz.Tests;
 
 public class CSharpLexTests
 {

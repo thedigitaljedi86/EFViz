@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 /// <summary>
 /// Minimal C# lexing helpers — a direct port of src/csharp.js from the npm CLI.

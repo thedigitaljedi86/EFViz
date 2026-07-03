@@ -1,18 +1,18 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
-using AutoEntityDiagram;
+using EFViz;
 
 var version = typeof(Program).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
     ?.InformationalVersion.Split('+')[0] ?? "1.0.0";
 
 var help = $"""
 
-    AutoEntityDiagram v{version}  (dotnet tool)
+    EFViz v{version}  (dotnet tool)
     Interactive ER diagrams for Entity Framework Core — straight from your code.
 
     Usage
-      aed [path] [options]
+      scan [path] [options]
 
       path                    Workspace root to scan (default: current directory)
 
@@ -27,9 +27,9 @@ var help = $"""
       -h, --help              Show this help
 
     Examples
-      aed                                 Scan current directory
-      aed ./src -o docs/db-diagram.html   Scan ./src, write to docs/
-      aed --context OrdersContext --open  One context, open when done
+      scan                                 Scan current directory
+      scan ./src -o docs/db-diagram.html   Scan ./src, write to docs/
+      scan --context OrdersContext --open  One context, open when done
 
     """;
 

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoEntityDiagram\AutoEntityDiagram.csproj" />
+    <ProjectReference Include="..\EFViz\EFViz.csproj" />
   </ItemGroup>
 
 </Project>

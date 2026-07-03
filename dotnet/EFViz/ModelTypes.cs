@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 /// <summary>
 /// The diagram data model. Serializes to the exact JSON schema produced by the
@@ -222,7 +222,7 @@ public sealed class ContextResult
 
 public sealed class DiagramData
 {
-    [JsonPropertyName("tool")] public string Tool { get; set; } = "AutoEntityDiagram";
+    [JsonPropertyName("tool")] public string Tool { get; set; } = "EFViz";
     [JsonPropertyName("generatedAt")] public string GeneratedAt { get; set; } = "";
     [JsonPropertyName("root")] public string Root { get; set; } = "";
     [JsonPropertyName("contexts")] public List<ContextResult> Contexts { get; set; } = new();

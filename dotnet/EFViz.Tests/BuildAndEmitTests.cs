@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using Xunit;
 
-namespace AutoEntityDiagram.Tests;
+namespace EFViz.Tests;
 
 public class BuildAndEmitTests
 {
@@ -53,7 +53,7 @@ public class BuildAndEmitTests
         Assert.DoesNotContain("__APP__", html);
 
         var m = Regex.Match(html,
-            "<script id=\"aed-data\" type=\"application/json\">\\s*([\\s\\S]*?)\\s*</script>");
+            "<script id=\"efviz-data\" type=\"application/json\">\\s*([\\s\\S]*?)\\s*</script>");
         Assert.True(m.Success);
         using var doc = JsonDocument.Parse(m.Groups[1].Value.Replace("\\u003c", "<"));
         Assert.Equal("ShopContext",
@@ -71,9 +71,9 @@ public class BuildAndEmitTests
     [Fact]
     public void JsonMatchesNodeReference()
     {
-        var refPath = Path.Combine(TestPaths.RepoRoot, "dotnet", "AutoEntityDiagram.Tests", "fixtures", "webshop.node.json");
+        var refPath = Path.Combine(TestPaths.RepoRoot, "dotnet", "EFViz.Tests", "fixtures", "webshop.node.json");
         Assert.True(File.Exists(refPath),
-            "Reference fixture missing — regenerate with: node bin/auto-entity-diagram.js examples/WebShop --json <path>");
+            "Reference fixture missing — regenerate with: node bin/efviz.js examples/WebShop --json <path>");
 
         var expected = Normalize(File.ReadAllText(refPath));
         var data = DiagramBuilder.Build(TestPaths.WebShop);

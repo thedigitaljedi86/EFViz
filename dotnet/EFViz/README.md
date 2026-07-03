@@ -1,10 +1,10 @@
-# AutoEntityDiagram
+# EFViz
 
 Zero-config interactive ER diagrams for Entity Framework Core — straight from your code.
 
 ```bash
-dotnet tool install -g AutoEntityDiagram
-aed path/to/your/solution --open
+dotnet tool install -g EFViz
+scan path/to/your/solution --open
 ```
 
 Scans the workspace for `DbContext` classes and migrations, reads a complete model snapshot

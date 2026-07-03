@@ -1,4 +1,4 @@
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 /// <summary>
 /// Orchestration: scan a workspace and produce the complete diagram payload —

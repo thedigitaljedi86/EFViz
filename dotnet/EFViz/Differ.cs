@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 /// <summary>
 /// Computes structural differences between two model snapshots — the data

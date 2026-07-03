@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 public sealed record DbSetRef(string EntityType, string PropertyName);
 

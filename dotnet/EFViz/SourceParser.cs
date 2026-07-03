@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using static AutoEntityDiagram.CSharpLex;
+using static EFViz.CSharpLex;
 
-namespace AutoEntityDiagram;
+namespace EFViz;
 
 /// <summary>
 /// Fallback model builder for projects WITHOUT migrations: reconstructs a

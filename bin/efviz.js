@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * AutoEntityDiagram CLI — scan a workspace for EF Core DbContexts and
+ * EFViz CLI — scan a workspace for EF Core DbContexts and
  * migrations, and generate an interactive ER diagram as a single HTML file.
  *
  * Re-run the same command any time migrations change to refresh the diagram.
@@ -18,12 +18,12 @@ const here = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(readFileSync(join(here, '..', 'package.json'), 'utf8'));
 
 const HELP = `
-auto-entity-diagram v${pkg.version}
+EFViz v${pkg.version}
 Interactive ER diagrams for Entity Framework Core — straight from your code.
 
 Usage
-  auto-entity-diagram [path] [options]
-  aed [path] [options]
+  scan [path] [options]
+  efviz [path] [options]     (alias)
 
   path                    Workspace root to scan (default: current directory)
 
@@ -38,9 +38,9 @@ Options
   -h, --help              Show this help
 
 Examples
-  aed                                 Scan current directory
-  aed ./src -o docs/db-diagram.html   Scan ./src, write to docs/
-  aed --context OrdersContext --open  One context, open when done
+  scan                                 Scan current directory
+  scan ./src -o docs/db-diagram.html   Scan ./src, write to docs/
+  scan --context OrdersContext --open  One context, open when done
 `;
 
 function parseArgs(argv) {

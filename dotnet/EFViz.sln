@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoEntityDiagram", "AutoEntityDiagram\AutoEntityDiagram.csproj", "{A2EF26ED-58A8-4E8C-B5FE-86C9B73B7372}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFViz", "EFViz\EFViz.csproj", "{A2EF26ED-58A8-4E8C-B5FE-86C9B73B7372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoEntityDiagram.Tests", "AutoEntityDiagram.Tests\AutoEntityDiagram.Tests.csproj", "{27DE58CC-B13C-4530-AF01-1F794C55A781}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFViz.Tests", "EFViz.Tests\EFViz.Tests.csproj", "{27DE58CC-B13C-4530-AF01-1F794C55A781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

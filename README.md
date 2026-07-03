@@ -1,6 +1,6 @@
 <div align="center">
 
-# AutoEntityDiagram
+# EFViz
 
 **Zero-config interactive ER diagrams for Entity Framework Core — straight from your code.**
 
@@ -25,7 +25,7 @@ Available both as an **npm CLI** and a **.NET global tool** — same engine, sam
 ## Why
 
 Every EF Core project already contains a precise, versioned description of its database:
-the model snapshot and the migration designer files. AutoEntityDiagram turns that into a
+the model snapshot and the migration designer files. EFViz turns that into a
 living diagram — no database connection, no build step, no Graphviz, no runtime reflection.
 Just static analysis of the code you already have.
 
@@ -46,19 +46,19 @@ byte-for-byte identical diagrams (enforced by a parity check in CI).
 **.NET global tool** (natural for EF Core projects — no Node required):
 
 ```bash
-dotnet tool install -g AutoEntityDiagram
-aed path/to/your/solution --open
+dotnet tool install -g EFViz
+scan path/to/your/solution --open
 ```
 
 **npm CLI:**
 
 ```bash
 # no install needed
-npx auto-entity-diagram path/to/your/solution
+npx efviz path/to/your/solution
 
 # …or install globally and use the short alias
-npm install -g auto-entity-diagram
-aed path/to/your/solution --open
+npm install -g efviz
+scan path/to/your/solution --open
 ```
 
 Either way, open `entity-diagram.html` in a browser.
@@ -67,7 +67,7 @@ Either way, open `entity-diagram.html` in a browser.
 from the current state of the code in milliseconds:
 
 ```bash
-aed .        # refresh to the newest overview
+scan .        # refresh to the newest overview
 ```
 
 > **Requirements:** either Node.js ≥ 18 **or** the .NET 8 SDK — you don't need both.
@@ -111,7 +111,7 @@ notation with optionality markers.
 ## CLI
 
 ```text
-auto-entity-diagram [path] [options]      (alias: aed)
+efviz [path] [options]      (alias: scan)
 
   path                    Workspace root to scan (default: current directory)
 
@@ -143,7 +143,7 @@ per-migration snapshots and diffs) if you want to build your own tooling on top.
 1. **Scan** — walks the workspace (skipping `bin/`, `obj/`, `node_modules/`, …) and finds
    `DbContext` classes, `*.Designer.cs` migration files, and `*ModelSnapshot.cs` files.
 2. **Parse** — every migration's `.Designer.cs` contains a complete, machine-generated
-   snapshot of the model *at that migration*. AutoEntityDiagram parses this fluent builder
+   snapshot of the model *at that migration*. EFViz parses this fluent builder
    code directly: entities, columns with store types, keys, indexes, relationships with
    delete behaviors, owned types, inheritance, and implicit many-to-many join tables.
 3. **Diff** — consecutive snapshots are compared structurally, producing the added /
@@ -172,13 +172,13 @@ columns, and a dropped legacy column:
 
 ```bash
 git clone https://github.com/thedigitaljedi86/AutoEntityDiagram.git
-cd AutoEntityDiagram
+cd EFViz
 
 # with Node
-node bin/auto-entity-diagram.js examples/WebShop -o webshop.html --open
+node bin/efviz.js examples/WebShop -o webshop.html --open
 
 # …or with .NET
-dotnet run --project dotnet/AutoEntityDiagram -- examples/WebShop -o webshop.html --open
+dotnet run --project dotnet/EFViz -- examples/WebShop -o webshop.html --open
 ```
 
 Or just open [`docs/demo/webshop.html`](docs/demo/webshop.html) from a checkout.
@@ -218,7 +218,7 @@ Or just open [`docs/demo/webshop.html`](docs/demo/webshop.html) from a checkout.
 Issues and PRs are very welcome. The codebase is small and dependency-free:
 
 ```
-bin/auto-entity-diagram.js       npm CLI
+bin/efviz.js       npm CLI
 src/scan.js                      workspace discovery
 src/csharp.js                    minimal C# lexing helpers
 src/snapshotParser.js            migration Designer / ModelSnapshot parser
@@ -227,10 +227,10 @@ src/diff.js                      model-to-model structural diff
 src/emit.js + src/viewer/        the interactive HTML viewer (shared by both tools)
 test/                            node:test suites
 
-dotnet/AutoEntityDiagram/        the .NET global tool — a C# port of the same
+dotnet/EFViz/        the .NET global tool — a C# port of the same
                                  scan → parse → diff → emit pipeline, embedding
                                  the shared src/viewer/ assets
-dotnet/AutoEntityDiagram.Tests/  xunit suites, incl. a JSON parity test that
+dotnet/EFViz.Tests/  xunit suites, incl. a JSON parity test that
                                  asserts identical output to the Node reference
 ```
 
@@ -238,13 +238,13 @@ dotnet/AutoEntityDiagram.Tests/  xunit suites, incl. a JSON parity test that
 node --test                         # run the Node tests
 npm run demo                        # rebuild docs/demo/webshop.html
 
-dotnet test dotnet/AutoEntityDiagram.sln   # run the .NET tests (+ parity check)
+dotnet test dotnet/EFViz.sln   # run the .NET tests (+ parity check)
 ```
 
 When you change a parser, keep the two implementations in step: the parity test in
-`dotnet/AutoEntityDiagram.Tests` will fail if the .NET output drifts from the Node
-reference fixture (regenerate it with `node bin/auto-entity-diagram.js examples/WebShop
---json dotnet/AutoEntityDiagram.Tests/fixtures/webshop.node.json`).
+`dotnet/EFViz.Tests` will fail if the .NET output drifts from the Node
+reference fixture (regenerate it with `node bin/efviz.js examples/WebShop
+--json dotnet/EFViz.Tests/fixtures/webshop.node.json`).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 

@@ -1,5 +1,5 @@
 {
-  "name": "auto-entity-diagram",
+  "name": "efviz",
   "version": "1.0.0",
   "description": "Zero-config interactive ER diagrams for Entity Framework Core. Scans your workspace for DbContexts and migrations, then generates a beautiful, self-contained HTML diagram with a migration timeline.",
   "keywords": [
@@ -15,15 +15,15 @@
     "csharp"
   ],
   "license": "MIT",
-  "author": "AutoEntityDiagram contributors",
+  "author": "EFViz contributors",
   "repository": {
     "type": "git",
     "url": "https://github.com/thedigitaljedi86/AutoEntityDiagram.git"
   },
   "type": "module",
   "bin": {
-    "auto-entity-diagram": "bin/auto-entity-diagram.js",
-    "aed": "bin/auto-entity-diagram.js"
+    "scan": "bin/efviz.js",
+    "efviz": "bin/efviz.js"
   },
   "files": [
     "bin",
@@ -36,6 +36,6 @@
   },
   "scripts": {
     "test": "node --test",
-    "demo": "node bin/auto-entity-diagram.js examples/WebShop -o docs/demo/webshop.html --title \"WebShop — Entity Diagram\""
+    "demo": "node bin/efviz.js examples/WebShop -o docs/demo/webshop.html --title \"WebShop — Entity Diagram\""
   }
 }
