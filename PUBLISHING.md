@@ -1,105 +1,104 @@
-# Publishing EFViz to NuGet
+# Publishing EFViz
 
-EFViz ships as a **.NET global tool**. Publishing it to [nuget.org](https://www.nuget.org)
-lets anyone install it with:
+EFViz ships as **two packages built from one codebase**:
 
-```bash
-dotnet tool install -g EFViz
-scan path/to/your/solution --open
+- a **.NET global tool** on [nuget.org](https://www.nuget.org) — `dotnet tool install -g EFViz`
+- an **npm CLI** on [npmjs.com](https://www.npmjs.com) — `npm install -g efviz`
+
+Both expose the `scan` command and produce byte-identical diagrams.
+
+Publishing is **fully automated**: every pull request that merges into `main` publishes a
+new stable version to both registries. There are also manual escape hatches if you need
+them.
+
+---
+
+## How versioning works
+
+The published version is `MAJOR.MINOR.<run-number>`:
+
+- `MAJOR.MINOR` is read from `<Version>` in `dotnet/EFViz/EFViz.csproj` (e.g. `1.0`).
+- the patch is the GitHub Actions run number, so every run gets a unique, increasing
+  version — no collisions, nothing to bump by hand for routine releases.
+
+To start a new minor/major line, bump `<Version>` in the csproj (and `version` in
+`package.json` to match) in a PR; the next merge publishes `1.1.x`, etc.
+
+---
+
+## One-time setup: API keys → repository secrets
+
+Add both under **GitHub repo → Settings → Secrets and variables → Actions → New repository
+secret**. Each publish step is skipped automatically until its secret exists, so the
+workflow is safe to run before they are in place.
+
+| Secret | Where to get it |
+| --- | --- |
+| `NUGET_API_KEY` | nuget.org → **Account → API Keys → Create**, scope **Push**, glob `EFViz` |
+| `NPM_API_KEY` | npmjs.com → **Access Tokens → Generate New Token → Automation** |
+
+> **Name claiming:** the first successful publish to each registry claims `EFViz` /
+> `efviz` for your account. If a name is taken, change `<PackageId>` in the csproj or
+> `name` in `package.json` and update the install commands.
+
+---
+
+## Continuous delivery (default) — merge a PR
+
+[`.github/workflows/publish.yml`](.github/workflows/publish.yml) runs on every push to
+`main`. It:
+
+1. runs the full .NET + Node test suites (including the cross-runtime parity check),
+2. packs and pushes the `EFViz` tool to NuGet,
+3. sets the version and publishes `efviz` to npm.
+
+So the normal release flow is simply:
+
+```text
+open PR  →  CI green  →  merge to main  →  new version live on NuGet + npm
 ```
 
-There are two ways to publish: an automated GitHub Actions release (recommended) and a
-manual one-off push. Both produce the exact same package.
+Watch it under the repo's **Actions → Publish** tab. `dotnet nuget push` uses
+`--skip-duplicate`, so re-runs are harmless.
 
 ---
 
-## One-time setup: NuGet API key
+## Manual alternatives
 
-1. Sign in at <https://www.nuget.org> (a Microsoft/GitHub login works).
-2. Go to **Account → API Keys → Create**.
-3. Give it:
-   - **Key Name:** `EFViz release`
-   - **Package Owner:** your account
-   - **Scopes:** `Push` → `Push new packages and package versions`
-   - **Glob Pattern:** `EFViz` (so the key can only touch this package)
-4. Copy the key — it is shown only once.
+### Tag a specific version (NuGet)
 
-> The package id `EFViz` must be free on nuget.org. The **first** push claims the id and
-> ties it to your account; nobody else can publish under it afterwards. If the name is
-> already taken, pick another `PackageId` in `dotnet/EFViz/EFViz.csproj` (e.g. `EFViz.Tool`
-> or a prefix you own) and update the install command accordingly.
-
----
-
-## Option A — Automated release (recommended)
-
-A workflow at [`.github/workflows/release.yml`](.github/workflows/release.yml) runs the
-tests, packs the tool, pushes it to NuGet, and creates a GitHub Release — all triggered by
-pushing a version tag.
-
-**Set the secret once:**
-
-- GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
-- Name: `NUGET_API_KEY`
-- Value: the key from above
-
-**Then release any version by tagging:**
+[`.github/workflows/release.yml`](.github/workflows/release.yml) publishes an exact version
+and cuts a GitHub Release when you push a `v*` tag:
 
 ```bash
-# bump the version in dotnet/EFViz/EFViz.csproj first (e.g. <Version>1.0.0</Version>)
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.2.0
+git push origin v1.2.0
 ```
 
-The tag's version (`v1.0.0` → `1.0.0`) is passed to `dotnet pack`, so the tag is the single
-source of truth for the published version. Watch it run under the repo's **Actions** tab.
-
----
-
-## Option B — Manual push from your machine
-
-Requires the .NET 8 SDK.
+### From your machine
 
 ```bash
-# from the repo root
+# NuGet (.NET 8 SDK)
 dotnet pack dotnet/EFViz/EFViz.csproj -c Release -p:ContinuousIntegrationBuild=true -o artifacts
+dotnet nuget push "artifacts/EFViz.*.nupkg" --api-key YOUR_NUGET_KEY \
+  --source https://api.nuget.org/v3/index.json --skip-duplicate
 
-# push the package (and its symbols) to nuget.org
-dotnet nuget push "artifacts/EFViz.*.nupkg" \
-  --api-key YOUR_NUGET_API_KEY \
-  --source https://api.nuget.org/v3/index.json \
-  --skip-duplicate
+# npm
+npm publish --access public   # after `npm login`
 ```
-
-It usually takes a few minutes for nuget.org to index and validate the package before it is
-installable.
 
 ---
 
-## Verify the published tool
+## Verify a published release
 
 ```bash
-dotnet tool install -g EFViz
+# .NET tool
+dotnet tool install -g EFViz    # or: dotnet tool update -g EFViz
 scan --version
-scan path/to/a/solution -o diagram.html
+
+# npm CLI
+npm install -g efviz            # or: npm update -g efviz
+scan --version
 ```
 
-To update later, bump `<Version>` (or push a new tag) and republish; users upgrade with:
-
-```bash
-dotnet tool update -g EFViz
-```
-
----
-
-## Releasing the npm CLI too (optional)
-
-The identical tool is also an npm package (`efviz`). If you want to publish that as well:
-
-```bash
-npm login
-npm publish        # publishes the `efviz` package with the `scan` / `efviz` commands
-```
-
-Both front ends share the same viewer and produce byte-identical output, so users can pick
-whichever runtime they already have.
+Both take a few minutes to index after publishing before they are installable.
