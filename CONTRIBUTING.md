@@ -7,7 +7,7 @@ Thanks for your interest! This project aims to stay **small, fast, and dependenc
 You only need Node.js ≥ 18 — there is nothing to install:
 
 ```bash
-git clone https://github.com/thedigitaljedi86/AutoEntityDiagram.git
+git clone https://github.com/thedigitaljedi86/EFViz.git
 cd EFViz
 node --test                                          # run the test suite
 node bin/efviz.js examples/WebShop \

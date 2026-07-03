@@ -15,4 +15,4 @@ migration timeline you can scrub back and forth to see how the schema evolved.
 Run the same command again whenever new migrations land to refresh the diagram.
 No build and no database connection required — parsing is purely static.
 
-Documentation, screenshots and source: https://github.com/thedigitaljedi86/AutoEntityDiagram
+Documentation, screenshots and source: https://github.com/thedigitaljedi86/EFViz

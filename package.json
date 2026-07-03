@@ -18,7 +18,7 @@
   "author": "EFViz contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thedigitaljedi86/AutoEntityDiagram.git"
+    "url": "https://github.com/thedigitaljedi86/EFViz.git"
   },
   "type": "module",
   "bin": {

@@ -8,7 +8,7 @@ Point it at any workspace. It finds your `DbContext`, reads the full model and e
 and generates a single self-contained HTML file: a modern, interactive entity-relationship
 diagram with a **migration timeline** you can scrub back and forth.
 
-[![CI](https://github.com/thedigitaljedi86/AutoEntityDiagram/actions/workflows/ci.yml/badge.svg)](https://github.com/thedigitaljedi86/AutoEntityDiagram/actions/workflows/ci.yml)
+[![CI](https://github.com/thedigitaljedi86/EFViz/actions/workflows/ci.yml/badge.svg)](https://github.com/thedigitaljedi86/EFViz/actions/workflows/ci.yml)
 [![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)](package.json)
 [![.NET tool](https://img.shields.io/badge/dotnet%20tool-net8.0-512bd4)](dotnet/)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
@@ -171,7 +171,7 @@ add owned types, a self-referencing category tree, many-to-many product tags, au
 columns, and a dropped legacy column:
 
 ```bash
-git clone https://github.com/thedigitaljedi86/AutoEntityDiagram.git
+git clone https://github.com/thedigitaljedi86/EFViz.git
 cd EFViz
 
 # with Node

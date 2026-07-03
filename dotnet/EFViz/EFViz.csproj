@@ -17,8 +17,8 @@
     <Description>Zero-config interactive ER diagrams for Entity Framework Core. Scans your workspace for DbContexts and migrations, then generates a self-contained HTML diagram with a migration timeline. No build or database connection required.</Description>
     <PackageTags>entity-framework;ef-core;er-diagram;database-diagram;dbcontext;migrations;visualization</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/thedigitaljedi86/AutoEntityDiagram</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/thedigitaljedi86/AutoEntityDiagram</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/thedigitaljedi86/EFViz</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thedigitaljedi86/EFViz</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
