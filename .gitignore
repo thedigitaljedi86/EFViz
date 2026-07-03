@@ -1,0 +1,6 @@
+node_modules/
+*.log
+.DS_Store
+entity-diagram.html
+entity-diagram.json
+/tmp/

@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    name: Node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Run tests
+        run: node --test
+      - name: Generate example diagram
+        run: |
+          node bin/auto-entity-diagram.js examples/WebShop -o /tmp/webshop.html --json /tmp/webshop.json
+          node bin/auto-entity-diagram.js examples/MinimalTodo -o /tmp/todo.html
+      - name: Upload example artifact
+        if: matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: example-diagrams
+          path: /tmp/*.html
