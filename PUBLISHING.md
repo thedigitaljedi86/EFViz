@@ -5,7 +5,7 @@ EFViz ships as **two packages built from one codebase**:
 - a **.NET global tool** on [nuget.org](https://www.nuget.org) — `dotnet tool install -g EFViz`
 - an **npm CLI** on [npmjs.com](https://www.npmjs.com) — `npm install -g efviz`
 
-Both expose the `scan` command and produce byte-identical diagrams.
+Both expose the `efviz-scan` command and produce byte-identical diagrams.
 
 Publishing is **fully automated**: every pull request that merges into `main` publishes a
 new stable version to both registries. There are also manual escape hatches if you need
@@ -94,11 +94,11 @@ npm publish --access public   # after `npm login`
 ```bash
 # .NET tool
 dotnet tool install -g EFViz    # or: dotnet tool update -g EFViz
-scan --version
+efviz-scan --version
 
 # npm CLI
 npm install -g efviz            # or: npm update -g efviz
-scan --version
+efviz-scan --version
 ```
 
 Both take a few minutes to index after publishing before they are installable.

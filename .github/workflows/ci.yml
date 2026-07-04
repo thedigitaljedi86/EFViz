@@ -41,13 +41,15 @@ jobs:
       - name: Test (includes JSON parity check against the Node reference)
         run: dotnet test dotnet/EFViz.sln -c Release
       - name: Pack the global tool
-        run: dotnet pack dotnet/EFViz/EFViz.csproj -c Release -o nupkg
+        # Pack a CI-only prerelease version so the install below resolves THIS
+        # build from the local folder, never a higher version from nuget.org.
+        run: dotnet pack dotnet/EFViz/EFViz.csproj -c Release -p:Version=0.0.0-ci -o nupkg
       - name: Install and smoke-test the packed tool
         run: |
-          dotnet tool install --global --add-source nupkg EFViz
+          dotnet tool install --global --add-source nupkg EFViz --version 0.0.0-ci
           export PATH="$PATH:$HOME/.dotnet/tools"
-          scan examples/WebShop -o /tmp/cs-webshop.html
-          scan examples/MinimalTodo -o /tmp/cs-todo.html
+          efviz-scan examples/WebShop -o /tmp/cs-webshop.html
+          efviz-scan examples/MinimalTodo -o /tmp/cs-todo.html
 
   parity:
     runs-on: ubuntu-latest

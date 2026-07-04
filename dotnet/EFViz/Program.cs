@@ -12,7 +12,7 @@ var help = $"""
     Interactive ER diagrams for Entity Framework Core — straight from your code.
 
     Usage
-      scan [path] [options]
+      efviz-scan [path] [options]
 
       path                    Workspace root to scan (default: current directory)
 
@@ -27,9 +27,9 @@ var help = $"""
       -h, --help              Show this help
 
     Examples
-      scan                                 Scan current directory
-      scan ./src -o docs/db-diagram.html   Scan ./src, write to docs/
-      scan --context OrdersContext --open  One context, open when done
+      efviz-scan                                 Scan current directory
+      efviz-scan ./src -o docs/db-diagram.html   Scan ./src, write to docs/
+      efviz-scan --context OrdersContext --open  One context, open when done
 
     """;
 

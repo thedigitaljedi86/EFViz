@@ -47,7 +47,7 @@ byte-for-byte identical diagrams (enforced by a parity check in CI).
 
 ```bash
 dotnet tool install -g EFViz
-scan path/to/your/solution --open
+efviz-scan path/to/your/solution --open
 ```
 
 **npm CLI:**
@@ -56,9 +56,9 @@ scan path/to/your/solution --open
 # no install needed
 npx efviz path/to/your/solution
 
-# …or install globally and use the short alias
+# …or install globally
 npm install -g efviz
-scan path/to/your/solution --open
+efviz-scan path/to/your/solution --open
 ```
 
 Either way, open `entity-diagram.html` in a browser.
@@ -67,7 +67,7 @@ Either way, open `entity-diagram.html` in a browser.
 from the current state of the code in milliseconds:
 
 ```bash
-scan .        # refresh to the newest overview
+efviz-scan .        # refresh to the newest overview
 ```
 
 > **Requirements:** either Node.js ≥ 18 **or** the .NET 8 SDK — you don't need both.
@@ -115,7 +115,7 @@ notation with optionality markers.
 ## CLI
 
 ```text
-efviz [path] [options]      (alias: scan)
+efviz-scan [path] [options]      (alias: efviz)
 
   path                    Workspace root to scan (default: current directory)
 
