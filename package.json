@@ -22,7 +22,7 @@
   },
   "type": "module",
   "bin": {
-    "scan": "bin/efviz.js",
+    "efviz-scan": "bin/efviz.js",
     "efviz": "bin/efviz.js"
   },
   "files": [

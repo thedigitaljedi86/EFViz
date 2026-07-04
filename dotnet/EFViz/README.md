@@ -4,7 +4,7 @@ Zero-config interactive ER diagrams for Entity Framework Core — straight from 
 
 ```bash
 dotnet tool install -g EFViz
-scan path/to/your/solution --open
+efviz-scan path/to/your/solution --open
 ```
 
 Scans the workspace for `DbContext` classes and migrations, reads a complete model snapshot

@@ -22,8 +22,8 @@ EFViz v${pkg.version}
 Interactive ER diagrams for Entity Framework Core — straight from your code.
 
 Usage
-  scan [path] [options]
-  efviz [path] [options]     (alias)
+  efviz-scan [path] [options]
+  efviz [path] [options]        (alias)
 
   path                    Workspace root to scan (default: current directory)
 
@@ -38,9 +38,9 @@ Options
   -h, --help              Show this help
 
 Examples
-  scan                                 Scan current directory
-  scan ./src -o docs/db-diagram.html   Scan ./src, write to docs/
-  scan --context OrdersContext --open  One context, open when done
+  efviz-scan                                 Scan current directory
+  efviz-scan ./src -o docs/db-diagram.html   Scan ./src, write to docs/
+  efviz-scan --context OrdersContext --open  One context, open when done
 `;
 
 function parseArgs(argv) {

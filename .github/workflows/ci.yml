@@ -46,8 +46,8 @@ jobs:
         run: |
           dotnet tool install --global --add-source nupkg EFViz
           export PATH="$PATH:$HOME/.dotnet/tools"
-          scan examples/WebShop -o /tmp/cs-webshop.html
-          scan examples/MinimalTodo -o /tmp/cs-todo.html
+          efviz-scan examples/WebShop -o /tmp/cs-webshop.html
+          efviz-scan examples/MinimalTodo -o /tmp/cs-todo.html
 
   parity:
     runs-on: ubuntu-latest
