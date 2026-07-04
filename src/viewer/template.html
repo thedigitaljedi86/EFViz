@@ -46,9 +46,22 @@ __STYLES__
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg>
   </button>
 
-  <button class="iconbtn" id="exportBtn" title="Export diagram (SVG / PNG)">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>
-  </button>
+  <div class="menu-wrap">
+    <button class="iconbtn" id="exportBtn" title="Export diagram" aria-haspopup="true" aria-expanded="false">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>
+    </button>
+    <div class="menu" id="exportMenu" role="menu" hidden>
+      <div class="menu-head">Export diagram</div>
+      <button class="menu-item" id="exportSvg" role="menuitem">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h10l6 6v12a0 0 0 0 1 0 0H4Z"/><path d="M14 3v6h6"/></svg>
+        <span>SVG <em>vector, scalable</em></span>
+      </button>
+      <button class="menu-item" id="exportPng" role="menuitem">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 16-5-5L5 20"/></svg>
+        <span>PNG <em>2× raster</em></span>
+      </button>
+    </div>
+  </div>
 
   <div class="divider-v"></div>
 

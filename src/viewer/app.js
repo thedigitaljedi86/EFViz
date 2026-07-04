@@ -1135,7 +1135,7 @@
       case '-': $('zoomOut').click(); break;
       case 'f': case 'F': fitToView(); break;
       case 'r': case 'R': $('zoomReset').click(); break;
-      case 'Escape': closeDetails(); break;
+      case 'Escape': setExportMenu(false); closeDetails(); break;
       case '/':
         ev.preventDefault();
         $('search').focus();
@@ -1149,10 +1149,20 @@
 
   /* ---------------- export ---------------- */
 
-  $('exportBtn').addEventListener('click', async () => {
-    const choice = window.confirm('Export as SVG?\n\nOK = SVG · Cancel = PNG (2×)');
-    if (choice) downloadSvg();
-    else downloadPng();
+  const exportMenu = $('exportMenu');
+  function setExportMenu(open) {
+    exportMenu.hidden = !open;
+    $('exportBtn').setAttribute('aria-expanded', String(open));
+    $('exportBtn').classList.toggle('active', open);
+  }
+  $('exportBtn').addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    setExportMenu(exportMenu.hidden);
+  });
+  $('exportSvg').addEventListener('click', () => { setExportMenu(false); downloadSvg(); });
+  $('exportPng').addEventListener('click', () => { setExportMenu(false); downloadPng(); });
+  document.addEventListener('click', (ev) => {
+    if (!exportMenu.hidden && !ev.target.closest('.menu-wrap')) setExportMenu(false);
   });
 
   function buildExportSvg() {
