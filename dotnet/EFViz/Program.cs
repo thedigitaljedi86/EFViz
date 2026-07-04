@@ -79,7 +79,12 @@ while (queue.Count > 0)
 }
 
 var root = Path.GetFullPath(path);
-if (!Directory.Exists(root)) return Fail($"Not a directory: {root}");
+if (!Directory.Exists(root))
+{
+    if (File.Exists(root) && System.Text.RegularExpressions.Regex.IsMatch(root, @"\.(sqlite3?|db)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+        return Fail($"'{root}' looks like a SQLite database. SQLite introspection is available in the npm CLI:\n  npx efviz \"{root}\" -o schema.html");
+    return Fail($"Not a directory: {root}");
+}
 
 void Log(string message)
 {

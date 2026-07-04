@@ -168,6 +168,32 @@ DbSet-based table names), data annotations (`[Table]`, `[Key]`, `[Required]`,
 Custom fluent configuration in `OnModelCreating` is not evaluated in this mode, so the
 first migration you add will make the diagram exact.
 
+### Not using EF Core? Point it at a SQLite file
+
+EFViz's viewer is ORM-agnostic — only the parser is EF-specific. The **npm CLI** can also
+read a **SQLite database directly**, which makes it useful for any stack that stores its
+schema in SQLite (better-sqlite3, `node:sqlite`, Drizzle, raw SQL, a Next.js app, …):
+
+```bash
+npx efviz ./data/app.sqlite -o schema.html --open
+```
+
+Give it a `.sqlite`/`.db`/`.sqlite3` file (or add `--sqlite`) and it reads the schema
+straight from the database — tables, views, columns and types, primary keys, foreign keys
+**with their on-delete behaviour**, unique indexes, self-references, and many-to-many join
+tables — via `sqlite_master` and PRAGMAs. Nothing is guessed from code.
+
+```bash
+# try it on a generated micro-bakery database
+node examples/microbakery-sqlite/seed.mjs
+npx efviz microbakery.sqlite -o microbakery.html --open
+```
+
+> SQLite mode uses Node's built-in `node:sqlite`, so it needs **Node ≥ 22.5** (EF Core
+> scanning works on Node ≥ 18). There's no migration history in a raw database, so you get
+> a single current-schema view rather than the migration timeline. It's an npm-CLI feature;
+> the .NET tool stays focused on EF Core.
+
 ## Try it
 
 The repository ships with a sample project — a small web shop with four migrations that
