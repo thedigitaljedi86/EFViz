@@ -97,6 +97,7 @@ public sealed class Entity
     [JsonPropertyName("indexes")] public List<Index> Indexes { get; set; } = new();
     [JsonPropertyName("discriminator")] public Discriminator? Disc { get; set; }
     [JsonPropertyName("baseType")] public string? BaseType { get; set; }
+    [JsonPropertyName("mappingStrategy")] public string? MappingStrategy { get; set; }
     [JsonPropertyName("ownedTypes")] public List<OwnedType> OwnedTypes { get; set; } = new();
     [JsonPropertyName("seedCount")] public int SeedCount { get; set; }
     [JsonPropertyName("annotations")] public Dictionary<string, object?> Annotations { get; set; } = new();

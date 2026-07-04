@@ -126,3 +126,49 @@ test('initial designer has no Review/Tag and keeps legacy column', () => {
   const price = product.columns.find((c) => c.name === 'Price');
   assert.equal(price.storeType, 'decimal(10,2)');
 });
+
+function inheritanceSnapshot(strategyCall) {
+  return `
+    modelBuilder.Entity("App.Payment", b =>
+    {
+        b.Property<int>("Id").ValueGeneratedOnAdd();
+        b.Property<decimal>("Amount");
+        b.HasKey("Id");
+        b.ToTable("Payments");
+        ${strategyCall}
+    });
+    modelBuilder.Entity("App.CardPayment", b =>
+    {
+        b.HasBaseType("App.Payment");
+        b.Property<string>("Last4");
+        b.ToTable("CardPayments");
+    });
+  `;
+}
+
+test('detects TPH mapping strategy and defaults derived types to TPH', () => {
+  const model = parseSnapshotModel(inheritanceSnapshot('b.UseTphMappingStrategy();'));
+  const base = model.entities.find((e) => e.name === 'Payment');
+  const derived = model.entities.find((e) => e.name === 'CardPayment');
+  assert.equal(base.mappingStrategy, 'TPH');
+  assert.equal(derived.mappingStrategy, 'TPH');
+});
+
+test('propagates TPT/TPC mapping strategy from root to derived types', () => {
+  for (const [call, expected] of [['b.UseTptMappingStrategy();', 'TPT'], ['b.UseTpcMappingStrategy();', 'TPC']]) {
+    const model = parseSnapshotModel(inheritanceSnapshot(call));
+    assert.equal(model.entities.find((e) => e.name === 'Payment').mappingStrategy, expected);
+    assert.equal(model.entities.find((e) => e.name === 'CardPayment').mappingStrategy, expected);
+  }
+});
+
+test('inheritance with no explicit strategy defaults to TPH', () => {
+  const model = parseSnapshotModel(inheritanceSnapshot(''));
+  assert.equal(model.entities.find((e) => e.name === 'CardPayment').mappingStrategy, 'TPH');
+});
+
+test('non-inheritance entities have no mapping strategy', () => {
+  const model = parseSnapshotModel(finalDesigner);
+  const product = model.entities.find((e) => e.name === 'Product');
+  assert.equal(product.mappingStrategy, null);
+});

@@ -47,6 +47,7 @@ export function parseSnapshotModel(code) {
         indexes: [],
         discriminator: null,
         baseType: null,
+        mappingStrategy: null,
         ownedTypes: [],
         seedCount: 0,
         annotations: {},
@@ -209,11 +210,17 @@ function applyEntityChain(model, entity, chain, getEntity) {
       parseOwned(model, entity, head, getEntity);
       return;
     }
+    case 'UseTphMappingStrategy':
+      entity.mappingStrategy = 'TPH';
+      return;
+    case 'UseTptMappingStrategy':
+      entity.mappingStrategy = 'TPT';
+      return;
+    case 'UseTpcMappingStrategy':
+      entity.mappingStrategy = 'TPC';
+      return;
     case 'Navigation':
     case 'HasQueryFilter':
-    case 'UseTphMappingStrategy':
-    case 'UseTptMappingStrategy':
-    case 'UseTpcMappingStrategy':
       return;
     default:
       return; // Unknown builder call — ignore gracefully.
@@ -256,6 +263,13 @@ function isReferenceClr(clrType) {
 
 function normalizeClrType(t) {
   return t.trim();
+}
+
+/** Canonicalize an inheritance mapping strategy to TPH/TPT/TPC, else null. */
+function normalizeStrategy(v) {
+  if (typeof v !== 'string') return null;
+  const s = v.trim().toUpperCase();
+  return s === 'TPH' || s === 'TPT' || s === 'TPC' ? s : null;
 }
 
 function applyPropertyModifiers(col, calls) {
@@ -429,6 +443,7 @@ function parseOwned(model, owner, head, getEntity) {
     indexes: [],
     discriminator: null,
     baseType: null,
+    mappingStrategy: null,
     ownedTypes: [],
     seedCount: 0,
     annotations: {},
@@ -521,6 +536,28 @@ export function finalizeModel(model) {
         via: e.fullName,
       });
     }
+  }
+
+  // Resolve the inheritance mapping strategy for every entity in a hierarchy.
+  // A strategy is declared once — on the root entity, via UseTp*MappingStrategy()
+  // or the "Relational:MappingStrategy" annotation — and applies to the whole
+  // hierarchy, so propagate it down to the derived types. EF's default when
+  // nothing is declared is TPH (table-per-hierarchy).
+  const explicitStrategy = (e) =>
+    normalizeStrategy(e.mappingStrategy) ||
+    normalizeStrategy(e.annotations && e.annotations['Relational:MappingStrategy']);
+  const isBaseType = new Set(model.entities.filter((e) => e.baseType).map((e) => e.baseType));
+  for (const e of model.entities) {
+    const isDerived = e.baseType && byName.has(e.baseType);
+    if (!isDerived && !isBaseType.has(e.fullName)) continue;
+    let strategy = null;
+    let cur = e;
+    for (let guard = 0; cur && guard < 100; guard++) {
+      const s = explicitStrategy(cur);
+      if (s) strategy = s;
+      cur = cur.baseType ? byName.get(cur.baseType) : null;
+    }
+    e.mappingStrategy = strategy || 'TPH';
   }
 
   // Inheritance edges (TPH/TPT/TPC).

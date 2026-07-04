@@ -313,7 +313,8 @@
     if (entity.isJoinTable) chips.push('JOIN');
     if (entity.isOwned) chips.push('OWNED');
     if (entity.isView) chips.push('VIEW');
-    if (entity.baseType) chips.push('TPH');
+    if (entity.mappingStrategy) chips.push(entity.mappingStrategy);
+    else if (entity.baseType) chips.push('TPH');
     if (chips.length) text(g, node.w - 9, 17, chips.join(' · '), 'chip-join', 'end');
 
     el('line', { class: 'row-sep', x1: 0, y1: HEADER_H, x2: node.w, y2: HEADER_H }, g);
@@ -474,7 +475,10 @@
   }
 
   function describeRel(rel) {
-    if (rel.type === 'inheritance') return `${short(rel.dependent)} inherits ${short(rel.principal)}`;
+    if (rel.type === 'inheritance') {
+      const strat = entityByName(rel.dependent)?.mappingStrategy;
+      return `${short(rel.dependent)} inherits ${short(rel.principal)}${strat ? ` (${strategyLabel(strat)})` : ''}`;
+    }
     if (rel.type === 'many-to-many') return `${short(rel.dependent)} ↔ ${short(rel.principal)} (many-to-many via ${short(rel.via ?? 'join table')})`;
     const card = rel.type === 'one-to-one' ? '1 : 1' : '* : 1';
     const fk = rel.foreignKey?.length ? ` — FK ${rel.foreignKey.join(', ')}` : '';
@@ -486,6 +490,19 @@
   function short(fqn) {
     const parts = String(fqn).split('.');
     return parts[parts.length - 1];
+  }
+
+  function entityByName(fullName) {
+    return state.displayed?.entities.find((e) => e.fullName === fullName) ?? null;
+  }
+
+  const STRATEGY_LABELS = {
+    TPH: 'TPH · table-per-hierarchy',
+    TPT: 'TPT · table-per-type',
+    TPC: 'TPC · table-per-concrete-type',
+  };
+  function strategyLabel(s) {
+    return STRATEGY_LABELS[s] ?? s;
   }
 
   /* ---------------- main render ---------------- */
@@ -753,6 +770,7 @@
     if (entity.schema) kv.push(['Schema', entity.schema]);
     if (entity.primaryKey?.length) kv.push(['Primary key', entity.primaryKey.join(', ')]);
     if (entity.baseType) kv.push(['Inherits', short(entity.baseType)]);
+    if (entity.mappingStrategy) kv.push(['Inheritance', strategyLabel(entity.mappingStrategy)]);
     if (entity.discriminator) kv.push(['Discriminator', entity.discriminator.column]);
     if (entity.seedCount) kv.push(['Seed rows', String(entity.seedCount)]);
     section(body, 'Overview', `<dl class="d-kv">${kv.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`);
@@ -1161,6 +1179,7 @@
   });
   $('exportSvg').addEventListener('click', () => { setExportMenu(false); downloadSvg(); });
   $('exportPng').addEventListener('click', () => { setExportMenu(false); downloadPng(); });
+  $('exportMermaid').addEventListener('click', () => { setExportMenu(false); exportMermaid(); });
   document.addEventListener('click', (ev) => {
     if (!exportMenu.hidden && !ev.target.closest('.menu-wrap')) setExportMenu(false);
   });
@@ -1215,6 +1234,89 @@
       });
     };
     img.src = url;
+  }
+
+  function exportMermaid() {
+    const text = buildMermaid();
+    triggerDownload(URL.createObjectURL(new Blob([text], { type: 'text/plain' })), exportName() + '.mmd');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        () => toast('Mermaid copied & downloaded'),
+        () => toast('Mermaid exported')
+      );
+    } else {
+      toast('Mermaid exported');
+    }
+  }
+
+  // Render the currently visible model as a Mermaid `erDiagram`. Names, types and
+  // relationships mirror what's on the canvas (respecting the join-table toggle
+  // and the selected migration), so the text is a faithful, paste-anywhere copy.
+  function buildMermaid() {
+    const dm = state.displayed || visibleModel();
+    const entities = dm.entities.filter((e) => e.diffStatus !== 'removed');
+    const present = new Set(entities.map((e) => e.fullName));
+
+    const used = new Set();
+    const idMap = new Map();
+    const idFor = (fullName) => {
+      if (idMap.has(fullName)) return idMap.get(fullName);
+      let base = (short(fullName) || 'Entity').replace(/[^A-Za-z0-9_]/g, '_');
+      if (/^[0-9]/.test(base)) base = '_' + base;
+      let id = base;
+      let n = 2;
+      while (used.has(id)) id = `${base}_${n++}`;
+      used.add(id);
+      idMap.set(fullName, id);
+      return id;
+    };
+    const token = (s, fallback) =>
+      String(s ?? '').replace(/\s+/g, '_').replace(/[^A-Za-z0-9_]/g, '') || fallback;
+
+    const lines = ['erDiagram'];
+    for (const e of entities) {
+      const id = idFor(e.fullName);
+      const cols = e.columns.filter((c) => c.diffStatus !== 'removed');
+      if (!cols.length) {
+        lines.push(`  ${id} {`, `  }`);
+        continue;
+      }
+      lines.push(`  ${id} {`);
+      for (const c of cols) {
+        const type = token(c.storeType || c.clrType, 'unknown');
+        const name = token(c.columnName || c.name, 'column');
+        const key = c.isPrimaryKey ? ' PK' : c.isForeignKey ? ' FK' : '';
+        lines.push(`    ${type} ${name}${key}`);
+      }
+      lines.push(`  }`);
+    }
+
+    for (const r of dm.relationships) {
+      if (r.diffStatus === 'removed') continue;
+      if (!present.has(r.dependent) || !present.has(r.principal)) continue;
+      const left = idFor(r.principal);
+      const right = idFor(r.dependent);
+      let link;
+      let label;
+      if (r.type === 'inheritance') {
+        const strat = entityByName(r.dependent)?.mappingStrategy || 'TPH';
+        link = '||..||';
+        label = `${strat} inherits`;
+      } else if (r.type === 'many-to-many') {
+        link = '}o--o{';
+        label = 'many-to-many';
+      } else if (r.type === 'one-to-one') {
+        link = r.isRequired ? '||--||' : '||--o|';
+        label = r.navigation || r.inverseNavigation || 'one-to-one';
+      } else {
+        // one-to-many / many-to-one: principal is the "one" side.
+        link = r.isRequired ? '||--o{' : '|o--o{';
+        label = r.navigation || r.inverseNavigation || (r.foreignKey && r.foreignKey.join(', ')) || 'has';
+      }
+      lines.push(`  ${left} ${link} ${right} : "${String(label).replace(/"/g, "'")}"`);
+    }
+
+    return lines.join('\n') + '\n';
   }
 
   function exportName() {

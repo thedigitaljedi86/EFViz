@@ -162,6 +162,7 @@ function parseEntityClass(cls, classIndex) {
     indexes: [],
     discriminator: null,
     baseType: null,
+    mappingStrategy: null,
     ownedTypes: [],
     seedCount: 0,
     annotations: {},

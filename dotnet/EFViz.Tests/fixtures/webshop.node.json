@@ -1,7 +1,7 @@
 {
   "tool": "EFViz",
-  "generatedAt": "",
-  "root": "",
+  "generatedAt": "2026-07-04T14:27:20.021Z",
+  "root": "/home/user/EFViz/examples/WebShop",
   "contexts": [
     {
       "name": "ShopContext",
@@ -99,6 +99,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -170,6 +171,7 @@
                 "indexes": [],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -310,6 +312,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -434,6 +437,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -626,6 +630,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -856,6 +861,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -1026,6 +1032,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [
                   {
                     "type": "WebShop.Models.Address",
@@ -1179,6 +1186,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -1303,6 +1311,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -1495,6 +1504,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -1735,6 +1745,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -1905,6 +1916,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [
                   {
                     "type": "WebShop.Models.Address",
@@ -2058,6 +2070,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -2182,6 +2195,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -2374,6 +2388,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -2441,6 +2456,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {},
@@ -2505,6 +2521,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 2,
                 "annotations": {}
@@ -2788,6 +2805,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -2975,6 +2993,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [
                   {
                     "type": "WebShop.Models.Address",
@@ -3128,6 +3147,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -3252,6 +3272,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -3478,6 +3499,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -3545,6 +3567,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {},
@@ -3687,6 +3710,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 0,
                 "annotations": {}
@@ -3750,6 +3774,7 @@
                 ],
                 "discriminator": null,
                 "baseType": null,
+                "mappingStrategy": null,
                 "ownedTypes": [],
                 "seedCount": 2,
                 "annotations": {}
@@ -4103,6 +4128,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 0,
             "annotations": {}
@@ -4290,6 +4316,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [
               {
                 "type": "WebShop.Models.Address",
@@ -4443,6 +4470,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 0,
             "annotations": {}
@@ -4567,6 +4595,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 0,
             "annotations": {}
@@ -4793,6 +4822,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 0,
             "annotations": {}
@@ -4860,6 +4890,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 0,
             "annotations": {},
@@ -5002,6 +5033,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 0,
             "annotations": {}
@@ -5065,6 +5097,7 @@
             ],
             "discriminator": null,
             "baseType": null,
+            "mappingStrategy": null,
             "ownedTypes": [],
             "seedCount": 2,
             "annotations": {}

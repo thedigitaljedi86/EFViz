@@ -182,8 +182,17 @@ public static class SnapshotParser
             case "OwnsMany":
                 ParseOwned(model, entity, head, getEntity);
                 return;
+            case "UseTphMappingStrategy":
+                entity.MappingStrategy = "TPH";
+                return;
+            case "UseTptMappingStrategy":
+                entity.MappingStrategy = "TPT";
+                return;
+            case "UseTpcMappingStrategy":
+                entity.MappingStrategy = "TPC";
+                return;
             default:
-                return; // Navigation, HasQueryFilter, mapping strategies, unknown calls — ignore gracefully.
+                return; // Navigation, HasQueryFilter, unknown calls — ignore gracefully.
         }
     }
 
@@ -213,6 +222,14 @@ public static class SnapshotParser
     {
         var t = clrType.TrimEnd('?');
         return t is "string" or "byte[]" or "object";
+    }
+
+    /// <summary>Canonicalize an inheritance mapping strategy to TPH/TPT/TPC, else null.</summary>
+    private static string? NormalizeStrategy(string? v)
+    {
+        if (v is null) return null;
+        var s = v.Trim().ToUpperInvariant();
+        return s is "TPH" or "TPT" or "TPC" ? s : null;
     }
 
     private static void ApplyPropertyModifiers(Column col, List<Call> calls)
@@ -471,6 +488,33 @@ public static class SnapshotParser
                     Via = e.FullName,
                 });
             }
+        }
+
+        // Resolve the inheritance mapping strategy (TPH default / TPT / TPC) for
+        // every entity in a hierarchy. It is declared once on the root entity and
+        // applies to the whole hierarchy, so propagate it down to derived types.
+        static string? ExplicitStrategy(Entity e)
+        {
+            var s = NormalizeStrategy(e.MappingStrategy);
+            if (s is not null) return s;
+            return e.Annotations.TryGetValue("Relational:MappingStrategy", out var v)
+                ? NormalizeStrategy(v as string)
+                : null;
+        }
+        var baseTypes = model.Entities.Where(e => e.BaseType is not null).Select(e => e.BaseType!).ToHashSet();
+        foreach (var e in model.Entities)
+        {
+            var isDerived = e.BaseType is not null && byName.ContainsKey(e.BaseType);
+            if (!isDerived && !baseTypes.Contains(e.FullName)) continue;
+            string? strategy = null;
+            var cur = e;
+            for (var guard = 0; cur is not null && guard < 100; guard++)
+            {
+                var s = ExplicitStrategy(cur);
+                if (s is not null) strategy = s;
+                cur = cur.BaseType is not null && byName.TryGetValue(cur.BaseType, out var parent) ? parent : null;
+            }
+            e.MappingStrategy = strategy ?? "TPH";
         }
 
         foreach (var e in model.Entities)

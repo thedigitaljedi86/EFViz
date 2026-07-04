@@ -84,8 +84,10 @@ and constraints, primary/foreign keys, unique indexes, default values, concurren
 owned types, seed data, relationships, and the entity's own migration history.
 
 Use the **export** button in the toolbar to save the current view as a **scalable SVG**
-(vector — perfect for docs, wikis, and print) or a **2× PNG**. Both are theme-aware and
-fully self-contained.
+(vector — perfect for docs, wikis, and print), a **2× PNG**, or **Mermaid** `erDiagram`
+text (copied to the clipboard and downloaded as `.mmd`, ready to paste into GitHub,
+Markdown, or any Mermaid-aware tool). The image exports are theme-aware and fully
+self-contained; the Mermaid export mirrors exactly what's on the canvas.
 
 <div align="center">
 <img src="docs/screenshots/details-dark.png" alt="Entity detail panel, dark theme" width="900">
@@ -200,7 +202,7 @@ Or just open [`docs/demo/webshop.html`](docs/demo/webshop.html) from a checkout.
 | Indexes (unique, filtered) | ✅ |
 | Default values / SQL, computed columns | ✅ |
 | Identity / value generation, concurrency tokens | ✅ |
-| TPH inheritance & discriminators | ✅ basic |
+| Inheritance: TPH, TPT, TPC mapping strategies | ✅ detected & labelled per entity |
 | Seed data (`HasData`) | ✅ counted |
 | Providers | SQL Server, PostgreSQL, SQLite, MySQL, Oracle detected |
 | Views (`ToView`) | ✅ flagged |
