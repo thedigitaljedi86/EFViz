@@ -83,6 +83,10 @@ across entities and columns, and click any entity for the full story: columns wi
 and constraints, primary/foreign keys, unique indexes, default values, concurrency tokens,
 owned types, seed data, relationships, and the entity's own migration history.
 
+Use the **export** button in the toolbar to save the current view as a **scalable SVG**
+(vector — perfect for docs, wikis, and print) or a **2× PNG**. Both are theme-aware and
+fully self-contained.
+
 <div align="center">
 <img src="docs/screenshots/details-dark.png" alt="Entity detail panel, dark theme" width="900">
 </div>
