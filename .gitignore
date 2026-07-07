@@ -1,6 +1,8 @@
 node_modules/
 *.log
 .DS_Store
+efviz-diagram.html
+efviz-diagram.json
 entity-diagram.html
 entity-diagram.json
 /tmp/

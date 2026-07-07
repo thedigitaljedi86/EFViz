@@ -1,0 +1,52 @@
+<Project>
+
+  <!--
+    EFViz build integration.
+
+    Regenerates a self-contained ER diagram from this project's EF Core model on
+    every build by running the bundled EFViz scanner via `dotnet exec`. No global
+    tool install is required — only the .NET 8 runtime, which is present wherever
+    this project builds. Ideal for CI / build pipelines.
+
+    Configurable MSBuild properties (see EFViz.MSBuild.props for defaults):
+
+      EFVizEnabled          true (default) to enable; false to skip entirely.
+      EFVizRunOnBuild       true (default) to run automatically after Build.
+      EFVizScanPath         Directory to scan (default: the project directory).
+      EFVizOutput           Output HTML file (default: <project>/efviz-diagram.html).
+      EFVizContext          Restrict to a single DbContext by name.
+      EFVizTitle            Title shown in the diagram header.
+      EFVizJson             Also write the raw model + diff data as JSON to this file.
+      EFVizContinueOnError  true to warn instead of failing the build on error.
+  -->
+
+  <Target Name="EFVizGenerateDiagram"
+          AfterTargets="Build"
+          Condition="'$(EFVizEnabled)' == 'true' and '$(EFVizRunOnBuild)' == 'true' and '$(DesignTimeBuild)' != 'true'">
+
+    <PropertyGroup>
+      <!-- The bundled scanner sits at ../tools/net8.0/EFViz.dll relative to this
+           .targets file inside the restored package. -->
+      <_EFVizToolDll>$([MSBuild]::NormalizePath('$(MSBuildThisFileDirectory)', '..', 'tools', 'net8.0', 'EFViz.dll'))</_EFVizToolDll>
+
+      <!-- Prefer the exact dotnet host driving this build; fall back to PATH. -->
+      <_EFVizDotNetHost Condition="'$(DOTNET_HOST_PATH)' != ''">$(DOTNET_HOST_PATH)</_EFVizDotNetHost>
+      <_EFVizDotNetHost Condition="'$(_EFVizDotNetHost)' == ''">dotnet</_EFVizDotNetHost>
+
+      <_EFVizArgs>"$(EFVizScanPath)" --output "$(EFVizOutput)"</_EFVizArgs>
+      <_EFVizArgs Condition="'$(EFVizContext)' != ''">$(_EFVizArgs) --context "$(EFVizContext)"</_EFVizArgs>
+      <_EFVizArgs Condition="'$(EFVizTitle)' != ''">$(_EFVizArgs) --title "$(EFVizTitle)"</_EFVizArgs>
+      <_EFVizArgs Condition="'$(EFVizJson)' != ''">$(_EFVizArgs) --json "$(EFVizJson)"</_EFVizArgs>
+    </PropertyGroup>
+
+    <Error Condition="!Exists('$(_EFVizToolDll)')"
+           Text="EFViz: bundled scanner not found at '$(_EFVizToolDll)'. The EFViz.MSBuild package may not have restored completely — try a clean restore." />
+
+    <Message Importance="high" Text="EFViz: scanning '$(EFVizScanPath)' → '$(EFVizOutput)'" />
+
+    <Exec Command="&quot;$(_EFVizDotNetHost)&quot; exec &quot;$(_EFVizToolDll)&quot; $(_EFVizArgs)"
+          WorkingDirectory="$(MSBuildProjectDirectory)"
+          ContinueOnError="$(EFVizContinueOnError)" />
+  </Target>
+
+</Project>

@@ -61,7 +61,7 @@ npm install -g efviz
 efviz-scan path/to/your/solution --open
 ```
 
-Either way, open `entity-diagram.html` in a browser.
+Either way, open `efviz-diagram.html` in a browser.
 
 **When new migrations land**, just run the same command again — the diagram is rebuilt
 from the current state of the code in milliseconds:
@@ -73,6 +73,42 @@ efviz-scan .        # refresh to the newest overview
 > **Requirements:** either Node.js ≥ 18 **or** the .NET 8 SDK — you don't need both.
 > Your project does **not** need to compile: parsing is purely static, so it works on any
 > machine with the source checked out.
+
+## Use it in a build pipeline
+
+Don't want to install a tool on every machine and CI agent? Add EFViz to the project
+itself and let your existing build produce the diagram. Two options, both **without any
+global install** — a build agent only needs the .NET 8 runtime it already has:
+
+**MSBuild package — the diagram regenerates on every `dotnet build`:**
+
+```bash
+dotnet add package EFViz.MSBuild
+```
+
+```xml
+<!-- build-only reference; nothing ships into your output -->
+<PackageReference Include="EFViz.MSBuild" Version="1.0.*" PrivateAssets="all" />
+```
+
+```bash
+dotnet build          # → efviz-diagram.html, no extra pipeline step
+```
+
+Configure via MSBuild properties, e.g. `dotnet build -p:EFVizOutput=docs/db.html`
+(`EFVizOutput`, `EFVizContext`, `EFVizTitle`, `EFVizJson`, `EFVizContinueOnError`, …).
+See the [package README](dotnet/EFViz.MSBuild/README.md) for the full list.
+
+**.NET local tool — an explicit, pinned pipeline step:**
+
+```bash
+dotnet new tool-manifest          # once; commit .config/dotnet-tools.json
+dotnet tool install EFViz
+
+# in the pipeline:
+dotnet tool restore
+dotnet efviz-scan ./src -o docs/db-diagram.html
+```
 
 ## What you get
 
@@ -119,7 +155,7 @@ efviz-scan [path] [options]      (alias: efviz)
 
   path                    Workspace root to scan (default: current directory)
 
-  -o, --output <file>     Output HTML file           (default: entity-diagram.html)
+  -o, --output <file>     Output HTML file           (default: efviz-diagram.html)
   -c, --context <name>    Only include this DbContext (default: all found)
   -t, --title <text>      Title shown in the diagram header
       --json <file>       Also write the raw model + diff data as JSON

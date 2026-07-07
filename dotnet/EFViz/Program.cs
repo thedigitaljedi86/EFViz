@@ -17,7 +17,7 @@ var help = $"""
       path                    Workspace root to scan (default: current directory)
 
     Options
-      -o, --output <file>     Output HTML file           (default: entity-diagram.html)
+      -o, --output <file>     Output HTML file           (default: efviz-diagram.html)
       -c, --context <name>    Only include this DbContext (default: all found)
       -t, --title <text>      Title shown in the diagram header
           --json <file>       Also write the raw model + diff data as JSON
@@ -34,7 +34,7 @@ var help = $"""
     """;
 
 string path = ".";
-string output = "entity-diagram.html";
+string output = "efviz-diagram.html";
 string? contextFilter = null;
 string? title = null;
 string? jsonOut = null;

@@ -1,0 +1,85 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    EFViz.MSBuild — the build-pipeline package.
+
+    Add this to an EF Core project as a build-only <PackageReference> and every
+    `dotnet build` regenerates a self-contained ER diagram. It carries no code of
+    its own: it bundles the EFViz scanner binaries under tools/ and a set of
+    MSBuild targets (build/) that invoke them via `dotnet exec`. No global tool
+    install is required — only the .NET 8 runtime, which is already present
+    wherever the consumer builds. That makes it ideal for CI / build pipelines.
+  -->
+
+  <PropertyGroup>
+    <!-- Targets/props-only package: netstandard2.0 so it imports into any
+         consumer, no lib assembly, no transitive dependencies. -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- NU5100: files under tools/ (expected — that's where the scanner lives).
+         NU5128: no lib/ref (expected — this is a build-logic package). -->
+    <NoWarn>$(NoWarn);NU5100;NU5128</NoWarn>
+
+    <!-- Build-only dependency: never flows to the consumer's own consumers and
+         ships nothing into their output. -->
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <IsPackable>true</IsPackable>
+
+    <PackageId>EFViz.MSBuild</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>EFViz contributors</Authors>
+    <Company>EFViz</Company>
+    <Product>EFViz</Product>
+    <Copyright>Copyright (c) EFViz contributors</Copyright>
+    <Description>Build-time ER diagrams for Entity Framework Core. Add this package to your EF Core project and every `dotnet build` regenerates a self-contained HTML diagram from your DbContexts and migrations — no global tool install, ideal for CI / build pipelines. Bundles the EFViz scanner; requires only the .NET 8 runtime.</Description>
+    <PackageTags>entity-framework;ef-core;er-diagram;msbuild;build;ci;dbcontext;migrations;visualization;erd</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/thedigitaljedi86/EFViz</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thedigitaljedi86/EFViz</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>See https://github.com/thedigitaljedi86/EFViz/releases</PackageReleaseNotes>
+
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MSBuild logic imported into the consumer's build. NuGet auto-imports
+         build/$(PackageId).props (early) and build/$(PackageId).targets (late). -->
+    <None Include="build\EFViz.MSBuild.props" Pack="true" PackagePath="build\" />
+    <None Include="build\EFViz.MSBuild.targets" Pack="true" PackagePath="build\" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\EFViz\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!--
+    Publish the EFViz tool (framework-dependent) and fold its binaries into this
+    package under tools/net8.0/. TargetsForTfmSpecificContentInPackage is NuGet's
+    supported hook for adding computed files to a pack, so this works for a plain
+    `dotnet pack` with no extra flags.
+  -->
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_BundleEFVizScanner</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <Target Name="_BundleEFVizScanner">
+    <PropertyGroup>
+      <_EFVizPublishDir>$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', 'efviz-scanner'))</_EFVizPublishDir>
+    </PropertyGroup>
+
+    <MSBuild Projects="..\EFViz\EFViz.csproj"
+             Targets="Publish"
+             Properties="Configuration=$(Configuration);TargetFramework=net8.0;SelfContained=false;PublishDir=$(_EFVizPublishDir)" />
+
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(_EFVizPublishDir)**/*">
+        <PackagePath>tools/net8.0/%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+      </TfmSpecificPackageFile>
+    </ItemGroup>
+  </Target>
+
+</Project>

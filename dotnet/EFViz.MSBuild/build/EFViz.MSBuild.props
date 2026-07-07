@@ -1,0 +1,31 @@
+<Project>
+
+  <!--
+    Default settings for EFViz build integration. Imported early, so a consumer
+    can override any of these in their own .csproj or on the command line, e.g.
+
+      <PropertyGroup>
+        <EFVizOutput>docs/db-diagram.html</EFVizOutput>
+      </PropertyGroup>
+
+      dotnet build -p:EFVizOutput=docs/db.html
+  -->
+  <PropertyGroup>
+    <!-- Master switch. Set to false to disable EFViz entirely. -->
+    <EFVizEnabled Condition="'$(EFVizEnabled)' == ''">true</EFVizEnabled>
+
+    <!-- Run automatically after each Build. Set to false to only run on demand
+         via `dotnet build -t:EFVizGenerateDiagram`. -->
+    <EFVizRunOnBuild Condition="'$(EFVizRunOnBuild)' == ''">true</EFVizRunOnBuild>
+
+    <!-- Directory to scan for DbContexts and migrations. -->
+    <EFVizScanPath Condition="'$(EFVizScanPath)' == ''">$(MSBuildProjectDirectory)</EFVizScanPath>
+
+    <!-- Output HTML diagram. -->
+    <EFVizOutput Condition="'$(EFVizOutput)' == ''">$(MSBuildProjectDirectory)/efviz-diagram.html</EFVizOutput>
+
+    <!-- Fail the build if diagram generation fails (true) or just warn (false). -->
+    <EFVizContinueOnError Condition="'$(EFVizContinueOnError)' == ''">false</EFVizContinueOnError>
+  </PropertyGroup>
+
+</Project>

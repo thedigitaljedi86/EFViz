@@ -1,11 +1,16 @@
 # Publishing EFViz
 
-EFViz ships as **two packages built from one codebase**:
+EFViz ships as **three packages built from one codebase**:
 
 - a **.NET global tool** on [nuget.org](https://www.nuget.org) — `dotnet tool install -g EFViz`
+- a **.NET build-pipeline package** on nuget.org — `EFViz.MSBuild`, a build-only
+  `<PackageReference>` that regenerates the diagram on every `dotnet build` (no global
+  install). It bundles the global tool's binaries at pack time, so it always ships the
+  matching scanner.
 - an **npm CLI** on [npmjs.com](https://www.npmjs.com) — `npm install -g efviz`
 
-Both expose the `efviz-scan` command and produce byte-identical diagrams.
+All expose the same `efviz-scan` engine and produce byte-identical diagrams. The two
+NuGet packages share a single version.
 
 Publishing is **fully automated**: every pull request that merges into `main` publishes a
 new stable version to both registries. There are also manual escape hatches if you need
@@ -78,9 +83,10 @@ git push origin v1.2.0
 ### From your machine
 
 ```bash
-# NuGet (.NET 8 SDK)
+# NuGet (.NET 8 SDK) — pack both the global tool and the build-pipeline package
 dotnet pack dotnet/EFViz/EFViz.csproj -c Release -p:ContinuousIntegrationBuild=true -o artifacts
-dotnet nuget push "artifacts/EFViz.*.nupkg" --api-key YOUR_NUGET_KEY \
+dotnet pack dotnet/EFViz.MSBuild/EFViz.MSBuild.csproj -c Release -p:ContinuousIntegrationBuild=true -o artifacts
+dotnet nuget push "artifacts/*.nupkg" --api-key YOUR_NUGET_KEY \
   --source https://api.nuget.org/v3/index.json --skip-duplicate
 
 # npm
@@ -95,6 +101,10 @@ npm publish --access public   # after `npm login`
 # .NET tool
 dotnet tool install -g EFViz    # or: dotnet tool update -g EFViz
 efviz-scan --version
+
+# .NET build-pipeline package (in any EF Core project)
+dotnet add package EFViz.MSBuild
+dotnet build                    # regenerates efviz-diagram.html
 
 # npm CLI
 npm install -g efviz            # or: npm update -g efviz
