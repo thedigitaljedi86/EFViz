@@ -50,6 +50,28 @@ jobs:
           export PATH="$PATH:$HOME/.dotnet/tools"
           efviz-scan examples/WebShop -o /tmp/cs-webshop.html
           efviz-scan examples/MinimalTodo -o /tmp/cs-todo.html
+      - name: Pack and smoke-test the build-pipeline (MSBuild) package
+        # Consume EFViz.MSBuild exactly as a user would — reference it from the
+        # example EF project and build. The diagram must appear with no global
+        # tool install, proving the build-pipeline path end to end.
+        run: |
+          dotnet pack dotnet/EFViz.MSBuild/EFViz.MSBuild.csproj -c Release -p:Version=0.0.0-ci -o nupkg
+          work="$(mktemp -d)"
+          cp -r examples/WebShop/. "$work"/
+          rm -rf "$work"/bin "$work"/obj
+          printf '%s\n' \
+            '<configuration>' \
+            '  <packageSources>' \
+            '    <clear />' \
+            '    <add key="nuget" value="https://api.nuget.org/v3/index.json" />' \
+            "    <add key=\"local\" value=\"$PWD/nupkg\" />" \
+            '  </packageSources>' \
+            '</configuration>' > "$work/nuget.config"
+          dotnet add "$work"/WebShop.csproj package EFViz.MSBuild --version 0.0.0-ci
+          dotnet build "$work"/WebShop.csproj -c Release
+          test -f "$work/entity-diagram.html" \
+            && echo "✔ build-pipeline package generated the diagram" \
+            || { echo "✘ EFViz.MSBuild did not produce entity-diagram.html"; exit 1; }
 
   parity:
     runs-on: ubuntu-latest

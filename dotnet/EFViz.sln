@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFViz", "EFViz\EFViz.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFViz.Tests", "EFViz.Tests\EFViz.Tests.csproj", "{27DE58CC-B13C-4530-AF01-1F794C55A781}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFViz.MSBuild", "EFViz.MSBuild\EFViz.MSBuild.csproj", "{94ADD48E-6FBB-43AB-8FC1-06739AA0055C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{27DE58CC-B13C-4530-AF01-1F794C55A781}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27DE58CC-B13C-4530-AF01-1F794C55A781}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27DE58CC-B13C-4530-AF01-1F794C55A781}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94ADD48E-6FBB-43AB-8FC1-06739AA0055C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94ADD48E-6FBB-43AB-8FC1-06739AA0055C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94ADD48E-6FBB-43AB-8FC1-06739AA0055C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94ADD48E-6FBB-43AB-8FC1-06739AA0055C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -59,7 +59,13 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Pack
         run: |
+          # The global tool and the build-pipeline (MSBuild) package share a
+          # version; the latter bundles the former's binaries at pack time.
           dotnet pack dotnet/EFViz/EFViz.csproj -c Release \
+            -p:Version=${{ needs.build-test.outputs.version }} \
+            -p:ContinuousIntegrationBuild=true \
+            -o artifacts
+          dotnet pack dotnet/EFViz.MSBuild/EFViz.MSBuild.csproj -c Release \
             -p:Version=${{ needs.build-test.outputs.version }} \
             -p:ContinuousIntegrationBuild=true \
             -o artifacts

@@ -74,6 +74,42 @@ efviz-scan .        # refresh to the newest overview
 > Your project does **not** need to compile: parsing is purely static, so it works on any
 > machine with the source checked out.
 
+## Use it in a build pipeline
+
+Don't want to install a tool on every machine and CI agent? Add EFViz to the project
+itself and let your existing build produce the diagram. Two options, both **without any
+global install** — a build agent only needs the .NET 8 runtime it already has:
+
+**MSBuild package — the diagram regenerates on every `dotnet build`:**
+
+```bash
+dotnet add package EFViz.MSBuild
+```
+
+```xml
+<!-- build-only reference; nothing ships into your output -->
+<PackageReference Include="EFViz.MSBuild" Version="1.0.*" PrivateAssets="all" />
+```
+
+```bash
+dotnet build          # → entity-diagram.html, no extra pipeline step
+```
+
+Configure via MSBuild properties, e.g. `dotnet build -p:EFVizOutput=docs/db.html`
+(`EFVizOutput`, `EFVizContext`, `EFVizTitle`, `EFVizJson`, `EFVizContinueOnError`, …).
+See the [package README](dotnet/EFViz.MSBuild/README.md) for the full list.
+
+**.NET local tool — an explicit, pinned pipeline step:**
+
+```bash
+dotnet new tool-manifest          # once; commit .config/dotnet-tools.json
+dotnet tool install EFViz
+
+# in the pipeline:
+dotnet tool restore
+dotnet efviz-scan ./src -o docs/db-diagram.html
+```
+
 ## What you get
 
 ### Interactive diagram

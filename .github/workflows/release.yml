@@ -38,6 +38,10 @@ jobs:
             -p:Version=${{ steps.ver.outputs.version }} \
             -p:ContinuousIntegrationBuild=true \
             -o artifacts
+          dotnet pack dotnet/EFViz.MSBuild/EFViz.MSBuild.csproj -c Release \
+            -p:Version=${{ steps.ver.outputs.version }} \
+            -p:ContinuousIntegrationBuild=true \
+            -o artifacts
 
       - name: Push to NuGet
         run: |
