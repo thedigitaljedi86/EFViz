@@ -61,7 +61,7 @@ npm install -g efviz
 efviz-scan path/to/your/solution --open
 ```
 
-Either way, open `entity-diagram.html` in a browser.
+Either way, open `efviz-diagram.html` in a browser.
 
 **When new migrations land**, just run the same command again — the diagram is rebuilt
 from the current state of the code in milliseconds:
@@ -92,7 +92,7 @@ dotnet add package EFViz.MSBuild
 ```
 
 ```bash
-dotnet build          # → entity-diagram.html, no extra pipeline step
+dotnet build          # → efviz-diagram.html, no extra pipeline step
 ```
 
 Configure via MSBuild properties, e.g. `dotnet build -p:EFVizOutput=docs/db.html`
@@ -155,7 +155,7 @@ efviz-scan [path] [options]      (alias: efviz)
 
   path                    Workspace root to scan (default: current directory)
 
-  -o, --output <file>     Output HTML file           (default: entity-diagram.html)
+  -o, --output <file>     Output HTML file           (default: efviz-diagram.html)
   -c, --context <name>    Only include this DbContext (default: all found)
   -t, --title <text>      Title shown in the diagram header
       --json <file>       Also write the raw model + diff data as JSON

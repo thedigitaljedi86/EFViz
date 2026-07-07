@@ -30,7 +30,7 @@ Then just build — the diagram appears next to your project:
 
 ```bash
 dotnet build
-# → entity-diagram.html
+# → efviz-diagram.html
 ```
 
 In a pipeline there is no extra step: your existing `dotnet build` produces the
@@ -46,7 +46,7 @@ Set any of these MSBuild properties in your `.csproj` or on the command line
 | `EFVizEnabled` | `true` | Master switch; `false` disables everything. |
 | `EFVizRunOnBuild` | `true` | Run automatically after `Build`. |
 | `EFVizScanPath` | project dir | Directory to scan for `DbContext`s and migrations. |
-| `EFVizOutput` | `entity-diagram.html` | Output HTML file. |
+| `EFVizOutput` | `efviz-diagram.html` | Output HTML file. |
 | `EFVizContext` | *(all)* | Restrict to a single `DbContext` by name. |
 | `EFVizTitle` | *(none)* | Title shown in the diagram header. |
 | `EFVizJson` | *(none)* | Also write the raw model + diff data as JSON. |

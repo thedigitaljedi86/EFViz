@@ -30,7 +30,7 @@ Usage
                           SQLite database file (.sqlite/.db) to introspect
 
 Options
-  -o, --output <file>     Output HTML file           (default: entity-diagram.html)
+  -o, --output <file>     Output HTML file           (default: efviz-diagram.html)
   -c, --context <name>    Only include this DbContext (default: all found)
   -t, --title <text>      Title shown in the diagram header
       --sqlite            Treat <path> as a SQLite database file
@@ -52,7 +52,7 @@ raw SQL, … It needs Node >= 22.5; EF Core scanning works on Node >= 18.
 `;
 
 function parseArgs(argv) {
-  const opts = { path: '.', output: 'entity-diagram.html', context: null, title: null, json: null, open: false, quiet: false, sqlite: false };
+  const opts = { path: '.', output: 'efviz-diagram.html', context: null, title: null, json: null, open: false, quiet: false, sqlite: false };
   const args = [...argv];
   while (args.length) {
     const a = args.shift();

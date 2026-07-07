@@ -69,9 +69,9 @@ jobs:
             '</configuration>' > "$work/nuget.config"
           dotnet add "$work"/WebShop.csproj package EFViz.MSBuild --version 0.0.0-ci
           dotnet build "$work"/WebShop.csproj -c Release
-          test -f "$work/entity-diagram.html" \
+          test -f "$work/efviz-diagram.html" \
             && echo "✔ build-pipeline package generated the diagram" \
-            || { echo "✘ EFViz.MSBuild did not produce entity-diagram.html"; exit 1; }
+            || { echo "✘ EFViz.MSBuild did not produce efviz-diagram.html"; exit 1; }
 
   parity:
     runs-on: ubuntu-latest

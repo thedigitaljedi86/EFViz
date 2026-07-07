@@ -104,7 +104,7 @@ efviz-scan --version
 
 # .NET build-pipeline package (in any EF Core project)
 dotnet add package EFViz.MSBuild
-dotnet build                    # regenerates entity-diagram.html
+dotnet build                    # regenerates efviz-diagram.html
 
 # npm CLI
 npm install -g efviz            # or: npm update -g efviz

@@ -13,7 +13,7 @@
       EFVizEnabled          true (default) to enable; false to skip entirely.
       EFVizRunOnBuild       true (default) to run automatically after Build.
       EFVizScanPath         Directory to scan (default: the project directory).
-      EFVizOutput           Output HTML file (default: <project>/entity-diagram.html).
+      EFVizOutput           Output HTML file (default: <project>/efviz-diagram.html).
       EFVizContext          Restrict to a single DbContext by name.
       EFVizTitle            Title shown in the diagram header.
       EFVizJson             Also write the raw model + diff data as JSON to this file.
